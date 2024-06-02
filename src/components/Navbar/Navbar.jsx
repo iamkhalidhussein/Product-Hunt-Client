@@ -41,7 +41,7 @@ const Navbar = () => {
                     <label>Email</label> <br />
                     <input className="border w-full py-3 pl-4 bg-white rounded-md mt-1 mb-3" type="email" name="" id="" placeholder="Your Email"/> <br />
                     <label>Password</label> <br />
-                    <div className="flex relative"><input className="border w-full py-3 pl-4 bg-white rounded-md mt-1 mb-3" type={`${password ? 'text' : 'password'}`} name="" id="" placeholder="Your Password"/><div onClick={passwordToogle} className="absolute right-3 top-5"><IoEyeOutline className={`${password ? 'hidden' : 'visible'}`}/><IoEyeOffSharp className={`${password ? 'visible' : 'hidden'}`}/></div></div><br />
+                    <div className="flex relative"><input className="border w-full py-3 pl-4 bg-white rounded-md mt-1 mb-3" type={`${password ? 'text' : 'password'}`} name="" id="" placeholder="Your Password"/><div onClick={passwordToogle} className="absolute right-3 top-[19px]"><IoEyeOutline className={`${password ? 'hidden' : 'visible'} text-xl` }/><IoEyeOffSharp className={`${password ? 'visible' : 'hidden'} text-xl`}/></div></div><br />
                     <input className="border py-3 w-full text-black rounded-md mb-4 hover:text-white cursor-pointer hover:bg-[#686EF8] duration-200" type="submit" value="Login" />
                     </form>
                     
@@ -57,7 +57,7 @@ const Navbar = () => {
                         <FaGithub className="text-2xl"/>
                         <p className="text-[#79808A] group-hover:text-[#686EF8] text-base inter font-normal">Sign in with Github</p>
                     </div>
-                    <p className="text-[#79808A] text-base inter font-normal text-center pt-8">We won't share any post or activity on your <br /> profile, social login is here to fight spam.</p>
+                    <p className="text-[#79808A] text-base inter font-normal text-center pt-8">We won&apost share any post or activity on your <br /> profile, social login is here to fight spam.</p>
                 </div>
                 </dialog>
             </div>

@@ -2,9 +2,9 @@ import { ReactTyped } from "react-typed";
 
 const Banner = () => {
     return (
-        <div className='flex items-center justify-around bg-[#EAF0F2] z-0 absolute pt-24 pb-24 '>
-            <img className="absolute left-0 top-24" src="https://i.postimg.cc/nVG9bPBs/bg-left.png" alt="#" />
-            <div className="z-0">
+        <div className='flex items-center justify-around bg-[#EAF0F2]  relative pt-44 pb-24 '>
+            <img className="absolute left-0 top-44" src="https://i.postimg.cc/nVG9bPBs/bg-left.png" alt="#" />
+            <div>
                 <h1 className='text-[#1B2530] text-[45px] pb-4 font-semibold text-center leading-[54px] banner-bg-left'>Resources, Products, and Tools <br /> Curated for <ReactTyped
                     strings={[
                         "Creators",
@@ -28,7 +28,7 @@ const Banner = () => {
                     <button className="bg-[#686EF8] py-3 px-8 rounded-md">Submit Resource</button>
                 </div>
             </div>
-            <img className="absolute right-0 top-24" src="https://i.postimg.cc/9fbsjVm8/bg-right.png" alt="#" />
+            <img className="absolute right-0 top-44" src="https://i.postimg.cc/9fbsjVm8/bg-right.png" alt="#" />
         </div>
     );
 };

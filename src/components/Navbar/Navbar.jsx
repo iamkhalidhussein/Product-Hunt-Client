@@ -6,7 +6,7 @@ import { FiPlus } from "react-icons/fi";
 
 const Navbar = () => {
     return (
-        <div className="flex justify-between px-10 bg-[#F5F8F9] py-5 border ">
+        <div className="flex justify-between fixed z-10 w-full px-10 bg-[#F5F8F9] py-6 border ">
             <div className="flex items-center cursor-pointer"><img src="https://i.postimg.cc/XYLBrwFY/svgviewer-png-output-1.png" alt="logo" /></div>
 
             <div className="flex gap-5 items-center">

@@ -4,9 +4,18 @@ import { AiFillDiscord } from "react-icons/ai";
 import { FiPlus } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffSharp } from "react-icons/io5";
+import { useState } from "react";
+
 
 
 const Navbar = () => {
+    const [password, setPassword] = useState(false);
+    const passwordToogle = () => {
+        setPassword(!password)
+    }
+
     return (
         <div className="flex justify-between fixed z-10 w-full px-10 bg-[#F5F8F9] py-6 border ">
             <div className="flex items-center cursor-pointer"><img src="https://i.postimg.cc/0jwXHLS8/main-logo.png" alt="logo" /></div>
@@ -30,9 +39,9 @@ const Navbar = () => {
                     <img className="mx-auto" src="https://i.postimg.cc/0jwXHLS8/main-logo.png" alt="#" />
                     <p className="text-center text-[#79808A] text-base inter pb-9 pt-3">Sign in with your social media account to submit, <br /> upvote and bookmark resources.</p>
                     <label>Email</label> <br />
-                    <input className="border w-full py-3 pl-4 bg-white rounded-md mt-1 mb-3" type="text" name="" id="" placeholder="Your Email"/> <br />
+                    <input className="border w-full py-3 pl-4 bg-white rounded-md mt-1 mb-3" type="email" name="" id="" placeholder="Your Email"/> <br />
                     <label>Password</label> <br />
-                    <input className="border w-full py-3 pl-4 bg-white rounded-md mt-1 mb-3" type="email" name="" id="" placeholder="Your Password"/> <br />
+                    <div className="flex relative"><input className="border w-full py-3 pl-4 bg-white rounded-md mt-1 mb-3" type={`${password ? 'text' : 'password'}`} name="" id="" placeholder="Your Password"/><div onClick={passwordToogle} className="absolute right-3 top-5"><IoEyeOutline className={`${password ? 'hidden' : 'visible'}`}/><IoEyeOffSharp className={`${password ? 'visible' : 'hidden'}`}/></div></div><br />
                     <input className="border py-3 w-full text-black rounded-md mb-4 hover:text-white cursor-pointer hover:bg-[#686EF8] duration-200" type="submit" value="Login" />
                     </form>
                     

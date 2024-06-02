@@ -35,7 +35,7 @@ import { Tooltip } from 'react-tooltip'
 
 const Featured = () => {
     return (
-        <div className="flex gap-14 bg-[#F5F8F9] border">
+        <div className="flex gap-14 bg-[#F5F8F9] pt-5 border-t-[1px]">
             <div className='border bg-white text-[#1B2430] ml-10 mt-14 text-[18px] rounded-lg py-7 pl-10 pr-8'>
                 <h3 className="text-[#1B2430] text-2xl pb-7 font-medium">Categories</h3>
                 <div className='flex gap-2 mb-1 cursor-pointer py-3 rounded-md pl-4 pr-16 items-center hover:bg-[#686EF8] hover:text-white duration'><img src={ai} alt="#" /><span>AI (Artificial Intelligence)</span></div>
@@ -66,7 +66,7 @@ const Featured = () => {
                 <div className='flex gap-2 py-3 rounded-md pl-4 hover:bg-[#686EF8] hover:text-white duration-200 mb-1 cursor-pointer pr-16 items-center'><img src={webTemplate} alt="#" /><span>Web Templates</span></div>
                 <div className='flex gap-2 py-3 rounded-md pl-4 hover:bg-[#686EF8] hover:text-white duration-200 mb-1 cursor-pointer pr-16 items-center'><img src={web3} alt="#" /><span>Web3</span></div>
             </div>
-            <div>
+            <div className='mt-14'>
                 <h1 className="text-[#1B2530] text-[36px] font-medium">Featured Resources and Products</h1>
                 <p className="text-[#70808A] inter text-base font-medium pb-7">Trending, popular and featured resources, loved by the users most</p>
                 <hr className='mr-8'/>

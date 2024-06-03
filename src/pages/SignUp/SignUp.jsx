@@ -14,7 +14,7 @@ const SignUp = () => {
     }
 
     const navigate = useNavigate();
-    const {createUser, logOut} = useContext(AuthContext);
+    const {createUser, updateUserProfile, logOut,} = useContext(AuthContext);
 
     const handleSignUp = (e) => {
         e.preventDefault();
@@ -36,13 +36,33 @@ const SignUp = () => {
         const data = {name, email, photoURL, password};
         console.log(data);
         
+        //create new user
         createUser(data.email, data.password)
         .then((result) => {
             console.log(result.user)
+
+            //update user profile
+            updateUserProfile(data.name, data.photoURL)
+            .then((result) => {
+                console.log('user profile updated',result)
+                Swal.fire({
+                    icon: "success",
+                    title: "User Created Successfully!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
+
+            //logOut
             logOut()
             .then((result) => {
                 console.log(result);
             })
+
+            //navigation
             navigate('/login')
 
         })

@@ -3,7 +3,7 @@ import { FaGithub } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffSharp } from "react-icons/io5";
 import { useContext, useState } from "react";
-import {Link} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from 'sweetalert2';
 
@@ -15,6 +15,10 @@ const Login = () => {
     }
 
     const {signIn} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.pathname.state?.from?.pathname || '/';
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -36,6 +40,7 @@ const Login = () => {
         signIn(email, password)
         .then((result) => {
             console.log(result.user);
+            navigate(from, {replace: true})
         })
         
     }

@@ -9,6 +9,7 @@ import {AuthContext} from '../../providers/AuthProvider';
 const Navbar = () => {
     const {user} = useContext(AuthContext);
 
+    console.log(user)
     return (
         <div className="flex justify-between fixed z-10 w-full px-10 bg-[#F5F8F9] py-6 border ">
             <Link to="/" className="flex items-center cursor-pointer"><img src="https://i.postimg.cc/0jwXHLS8/main-logo.png" alt="logo" /></Link>

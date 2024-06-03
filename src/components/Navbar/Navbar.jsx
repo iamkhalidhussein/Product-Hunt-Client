@@ -3,9 +3,12 @@ import { FaXTwitter } from "react-icons/fa6";
 import { AiFillDiscord } from "react-icons/ai";
 import { FiPlus } from "react-icons/fi";
 import {Link} from 'react-router-dom';
-
+import { useContext } from "react";
+import {AuthContext} from '../../providers/AuthProvider';
 
 const Navbar = () => {
+    const {user} = useContext(AuthContext);
+
     return (
         <div className="flex justify-between fixed z-10 w-full px-10 bg-[#F5F8F9] py-6 border ">
             <Link to="/" className="flex items-center cursor-pointer"><img src="https://i.postimg.cc/0jwXHLS8/main-logo.png" alt="logo" /></Link>
@@ -21,17 +24,15 @@ const Navbar = () => {
                 <div className="flex items-center"><FaXTwitter className="text-slate-400 text-[21px]"/></div>
                 <div className="flex items-center"><AiFillDiscord className="text-slate-500 text-[22px]"/></div>
                 <div className="flex items-center cursor-pointer"><FiPlus className="text-xl"/><span className="text-[#79808A] text-[18px]">Submit</span></div>
-                <Link to='/login' className="flex items-center cursor-pointer bg-[#686EF8] py-2.5 px-4 rounded-sm gap-2"><LuUser className="text-white text-[18px]"/><span className="text-white">Account</span></Link>
+                {
+                    user ? <>
+                        <Link to='/dashboard' className="flex items-center cursor-pointer bg-[#686EF8] py-2.5 px-4 rounded-sm gap-2"><LuUser className="text-white text-[18px]"/><span className="text-white">Dashboard</span></Link>
+                    </> 
+                    : <><Link to='/login' className="flex items-center cursor-pointer bg-[#686EF8] py-2.5 px-4 rounded-sm gap-2"><LuUser className="text-white text-[18px]"/><span className="text-white">Account</span></Link></>
+                }
             </div>
         </div>
     );
 };
 
 export default Navbar;
-
-
-{/* <img src="" alt="#" />
-<img src="" alt="#" />
-<img src="" alt="#" />
-<img src="" alt="#" />
-<img src="" alt="#" /> */}

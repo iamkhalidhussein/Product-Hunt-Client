@@ -14,7 +14,7 @@ const Login = () => {
         setPassword(!password)
     }
 
-    const {signIn} = useContext(AuthContext);
+    const {signIn, googleSignIn, githubSignIn} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -45,6 +45,28 @@ const Login = () => {
         
     }
 
+    //google sign in with popup
+    const signInWithGoogle = () => {
+        googleSignIn()
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((error) => {
+            console.log(error.message);
+        })
+    }
+
+    //github sign in with popup
+    const signInWithGithub = () => {
+        githubSignIn() 
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((error) => {
+            console.log(error.message);
+        })
+    }
+
     return (
         <div className="bg-[#EAF0F2] pt-20">
             <div className="rounded-md p-16">
@@ -63,11 +85,11 @@ const Login = () => {
                         <div className="divider">Or</div>
                     </div>
 
-                    <div className="border py-3 rounded flex gap-3 items-center justify-center hover:bg-[#F5F8F9] duration-200 cursor-pointer group">
+                    <div onClick={signInWithGoogle} className="border py-3 rounded flex gap-3 items-center justify-center hover:bg-[#F5F8F9] duration-200 cursor-pointer group">
                         <FcGoogle className="text-2xl"/>
                         <p className="text-[#79808A] text-base inter font-normal group-hover:text-[#686EF8]">Sign in with Google</p>
                     </div>
-                    <div className="border py-3 mt-3 rounded flex gap-3 items-center justify-center hover:bg-[#F5F8F9] duration-200 cursor-pointer group">
+                    <div onClick={signInWithGithub} className="border py-3 mt-3 rounded flex gap-3 items-center justify-center hover:bg-[#F5F8F9] duration-200 cursor-pointer group">
                         <FaGithub className="text-2xl"/>
                         <p className="text-[#79808A] group-hover:text-[#686EF8] text-base inter font-normal">Sign in with Github</p>
                     </div>

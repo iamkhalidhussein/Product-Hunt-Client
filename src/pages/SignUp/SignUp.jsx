@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { IoEyeOffSharp, IoEyeOutline } from "react-icons/io5";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from 'sweetalert2';
 
@@ -13,7 +13,8 @@ const SignUp = () => {
         setPassword(!password)
     }
 
-    const {createUser} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const {createUser, logOut} = useContext(AuthContext);
 
     const handleSignUp = (e) => {
         e.preventDefault();
@@ -31,13 +32,19 @@ const SignUp = () => {
             });
             return
         }
-
+        
         const data = {name, email, photoURL, password};
         console.log(data);
-
+        
         createUser(data.email, data.password)
         .then((result) => {
             console.log(result.user)
+            logOut()
+            .then((result) => {
+                console.log(result);
+            })
+            navigate('/login')
+
         })
     }
     return (

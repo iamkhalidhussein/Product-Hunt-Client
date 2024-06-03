@@ -5,6 +5,8 @@ import { IoEyeOffSharp } from "react-icons/io5";
 import { useContext, useState } from "react";
 import {Link} from 'react-router-dom';
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from 'sweetalert2';
+
 
 const Login = () => {
     const [password, setPassword] = useState(false);
@@ -19,6 +21,15 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
+
+        if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=]).{6,}$/.test(password)) {
+            Swal.fire({
+                title: "Invalid Password Format",
+                text: "Your password must contain min one lowercase and uppsercase lettter and at least one digit and one special character and password lenght have to be six character or longer",
+                icon: "warning"
+            });
+            return;
+        }
 
         console.log(email, password);
 

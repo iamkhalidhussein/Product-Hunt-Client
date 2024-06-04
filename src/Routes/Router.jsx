@@ -12,6 +12,12 @@ import Approved from '../components/Approved/Approved';
 import UnderReview from '../components/UnderReview/UnderReview';
 import Rejected from '../components/Rejected/Rejected';
 import DashboardErrorPage from '../components/DashboardErrorPage/DashboardErrorPage';
+import Profile from '../components/Profile/Profile';
+import Bookmarks from '../components/Bookmarks/Bookmarks';
+import Upvotes from '../components/Upvotes/Upvotes';
+import Submissions from '../components/Submissions/Sumissions';
+import Settings from '../components/Settings/Settings';
+
 
 export const router = createBrowserRouter([
         {
@@ -31,6 +37,10 @@ export const router = createBrowserRouter([
                 path: '/login',
                 element: <Login></Login>
             },
+            {
+                path: '/profile/approved',
+                element: <Approved></Approved>
+            },
         ]
         },
         {
@@ -39,16 +49,32 @@ export const router = createBrowserRouter([
             errorElement: <DashboardErrorPage></DashboardErrorPage>,
             children: [
                 {
-                    path: 'approved',
-                    element: <Approved></Approved>
-                },
-                {
                     path: 'underReview',
                     element: <UnderReview></UnderReview>
                 },
                 {
                     path: 'rejected',
                     element: <Rejected></Rejected>
+                },
+                {
+                    path: 'profile',
+                    element: <Profile></Profile>
+                },
+                {
+                    path: 'bookmarks',
+                    element: <Bookmarks></Bookmarks>
+                },
+                {
+                    path: 'upvotes',
+                    element: <Upvotes></Upvotes>
+                },
+                {
+                    path: 'submissions',
+                    element: <Submissions></Submissions>
+                },
+                {
+                    path: 'settings',
+                    element: <Settings></Settings>
                 }
             ]
         },

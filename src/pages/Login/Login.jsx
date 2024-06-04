@@ -14,7 +14,7 @@ const Login = () => {
         setPassword(!password)
     }
 
-    const {signIn, googleSignIn, githubSignIn} = useContext(AuthContext);
+    const {signIn, googleSignIn, githubSignIn, user} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -49,12 +49,13 @@ const Login = () => {
     const signInWithGoogle = () => {
         googleSignIn()
         .then((result) => {
-            console.log(result);
+            console.log(result.user)
         })
         .catch((error) => {
-            console.log(error.message);
+            console.log(error.message)
         })
-    }
+    };
+    
 
     //github sign in with popup
     const signInWithGithub = () => {

@@ -25,18 +25,38 @@ import uiLibraries from '../../assets/ui-libraries.png';
 import webDev from '../../assets/web-development.png';
 import webTemplate from '../../assets/web-templates.png';
 import web3 from '../../assets/web3.png';
-import upvote from '../../assets/upvote.png';
-import { MdArrowOutward } from "react-icons/md";
-import { CiBookmark } from "react-icons/ci";
 import 'react-tooltip/dist/react-tooltip.css'
-import { Tooltip } from 'react-tooltip'
+import { useEffect, useState } from 'react';
+import FeatureItem from './FeatureItem';
+import LatestResources from './LatestResources';
 
 
 
 const Featured = () => {
+    const [featuredProducts, setFeaturedProducts] = useState([]);
+    const [latestResources, setLatestResources] = useState([]);
+    const [showAll, setShowAll] = useState(false);
+    
+    useEffect(() => {
+        fetch('http://localhost:5000/featured-products')
+        .then(res => res.json())
+        .then(data => setFeaturedProducts(data))
+    }, [])
+
+    useEffect(() => {
+        fetch('http://localhost:5000/latest-resources')
+        .then(res => res.json())
+        .then(data => setLatestResources(data))
+    }, [])
+
+
+    const handleShowAll = () => {
+        setShowAll(true)
+    }
+
     return (
         <div className="flex gap-12 bg-[#F5F8F9] pt-5 border-t-[1px]">
-            <div className='border z-0 sticky left-0 top-0 h-screen overflow-y-auto bg-white text-[#1B2430] ml-10 mt-14 text-[18px] rounded-lg py-7 pl-10 pr-8'>
+            <div className='border z-0 sticky left-0 top-0 h-screen w-[650px] overflow-y-auto bg-white text-[#1B2430] ml-10 mt-14 text-[18px] rounded-lg py-7 pl-10 pr-8'>
                 <h3 className="text-[#1B2430] text-2xl pb-7 font-medium">Categories</h3>
                 <div className='flex gap-2 mb-1 cursor-pointer py-3 rounded-md pl-4 pr-16 items-center hover:bg-[#686EF8] hover:text-white duration'><img src={ai} alt="#" /><span>AI (Artificial Intelligence)</span></div>
                 <div className='flex gap-2 py-3 rounded-md pl-4 hover:bg-[#686EF8] hover:text-white duration-200 mb-1 cursor-pointer pr-16 items-center'><img src={api} alt="#" /><span>API</span></div>
@@ -66,119 +86,38 @@ const Featured = () => {
                 <div className='flex gap-2 py-3 rounded-md pl-4 hover:bg-[#686EF8] hover:text-white duration-200 mb-1 cursor-pointer pr-16 items-center'><img src={webTemplate} alt="#" /><span>Web Templates</span></div>
                 <div className='flex gap-2 py-3 rounded-md pl-4 hover:bg-[#686EF8] hover:text-white duration-200 mb-1 cursor-pointer pr-16 items-center'><img src={web3} alt="#" /><span>Web3</span></div>
             </div>
-            <div className='mt-14  mr-'>
-                <h1 className="text-[#1B2530] text-[36px] font-medium">Featured Resources and Products</h1>
-                <p className="text-[#70808A] inter text-base font-medium pb-7">Trending, popular and featured resources, loved by the users most</p>
+            <div className='mt-14 w-full'>
+                { !showAll ?
+                    <><h1 className="text-[#1B2530] text-[36px] font-medium">Featured Resources and Products</h1>
+                    <p className="text-[#70808A] inter text-base font-medium pb-7">Trending, popular and featured resources, loved by the users most</p></> :
+                    <><h1 className="text-[#1B2530] text-[36px] font-medium leading-10 pb-3">Free Tools, Products and Resources for <br /> Developers and Designers</h1>
+                    <p className="text-[#70808A] inter text-base font-medium pb-7">You're exploring all available resources and products from all categories. Massive collection of the latest web development tools, design resources, and more. If you would like to sort them by category choose resource type from sidebar also you can sort by popular upvotes from right side. If you find something interesting feel free to submit and upvote resources you like most. All the resources handpicked for developers and designers to improve workflow.</p></>
+                }
                 <hr className='mr-8'/>
 
 
-                <div className='flex pt-12 gap-8'>
-                    <div className='border rounded-lg'>
-                        <div className='p-5 pl-6'><img className='w-96 h-56 border rounded-md' src="https://i.postimg.cc/tRFGWDY5/full-stack-boiler.png" alt="#" /></div>
-                        <div className='flex gap-[189px] px-5'><p className='text-[#1B2530 text-xl font-medium hover:text-[#686EF8] duration-150 cursor-pointer'>SaaSBold</p><span className='text-white bg-[#686EF8] px-3 rounded-sm py-[2px]'>Promoted</span></div>
-                        <p className='text-[#79808A] pt-4 pb-5 px-5 text-base inter font-medium'>This is a comprehensive SaaS Boilerplate and <br /> Starter Kit for Next.js. It's a production-ready</p>
-                        <hr />
-                        <div className='flex gap-[175px] py-5 px-5'>
-                            <div className='flex gap-2 border px-4 py-2 cursor-pointer rounded-[5px] border-[#6A6EF8] items-center text-[#6A6EF8] text-base inter font-medium '><img className='' src={upvote} alt="#" />Upvote<span>11</span></div>
-                            <div className='flex items-center text-[#79808A] cursor-pointer text-base inter font-medium hover:text-[#6A6EF8] duration-200'>Visit Site<MdArrowOutward /></div>
-                        </div>
-                    </div>
-                    <div className='border rounded-lg'>
-                        <div className='p-5 pl-6'><img className='w-96 h-56 border rounded-md' src="https://i.postimg.cc/Pq1Q2LZB/screen-shot-designer.png" alt="#" /></div>
-                        <div className='flex gap-[189px] px-5'><p className='text-[#1B2530 text-xl font-medium hover:text-[#686EF8] duration-150 cursor-pointer'>SaaSBold</p><span className='text-white bg-[#686EF8] px-3 rounded-sm py-[2px]'>Promoted</span></div>
-                        <p className='text-[#79808A] pt-4 pb-5 px-5 text-base inter font-medium'>This is a comprehensive SaaS Boilerplate and <br /> Starter Kit for Next.js. It's a production-ready</p>
-                        <hr />
-                        <div className='flex gap-[175px] py-5 px-5'>
-                            <div className='flex gap-2 border px-4 py-2 cursor-pointer rounded-[5px] border-[#6A6EF8] items-center text-[#6A6EF8] text-base inter font-medium '><img className='' src={upvote} alt="#" />Upvote<span>11</span></div>
-                            <div className='flex items-center text-[#79808A] cursor-pointer text-base inter font-medium hover:text-[#6A6EF8] duration-200'>Visit Site<MdArrowOutward /></div>
-                        </div>
-                    </div>
+                <div className='grid grid-cols-2 pt-12 gap-5'>
+                    { showAll ?
+                        featuredProducts.map(product => <FeatureItem key={product._id} product={product}></FeatureItem>) :
+                        featuredProducts.slice(0, 2).map(product => <FeatureItem key={product._id} product={product}></FeatureItem>)
+                    }
                 </div>
-                <div className='flex items-center justify-between pt-10'>
+
+                {!showAll &&
+                    <div className='flex items-center justify-between pr-3 pt-10'>
                     <div><h1 className="text-[#1B2530] text-[36px] font-medium">Latest Resources</h1>
                     <p className="text-[#70808A] inter text-base font-medium pb-7">Trending, popular and featured resources, loved by the users most</p></div>
-                    <button className='bg-[#686EF8] text-white text-base font-medium py-3 px-6 rounded-md cursor-pointer'>View All</button>
-                </div>
-                <hr />
-                <div className='grid grid-cols-2 gap-6 pt-14'>
-                <div className='border rounded-lg'>
-                        <div className='p-5 pl-6'><img className='w-96 h-56 border rounded-md' src="https://i.postimg.cc/QMDVt8PG/tempolor.avif" alt="#" /></div>
-                        <div className='flex justify-between px-6'><p className='text-[#1B2530 text-xl font-medium hover:text-[#686EF8] duration-150 cursor-pointer'>Tempolor</p><CiBookmark data-tooltip-id="my-tooltip" data-tooltip-content="Bookmark" className='hover:text-[#6A6EF8] text-[26px] cursor-pointer text-[#79808A]'/>
-                        <Tooltip id="my-tooltip" />
-                        </div>
-                        <p className='text-[#79808A] pt-4 pb-5 px-5 text-base inter font-medium'>This is a comprehensive SaaS Boilerplate and <br /> Starter Kit for Next.js. It's a production-ready</p>
-                        <hr />
-                        <div className='flex gap-[175px] py-5 px-5'>
-                            <div className='flex gap-2 border px-4 py-2 cursor-pointer rounded-[5px] border-[#6A6EF8] items-center text-[#6A6EF8] text-base inter font-medium '><img className='' src={upvote} alt="#" />Upvote<span>11</span></div>
-                            <div className='flex items-center text-[#79808A] cursor-pointer text-base inter font-medium hover:text-[#6A6EF8] duration-200'>Visit Site<MdArrowOutward /></div>
-                        </div>
+                    <button onClick={handleShowAll} className='bg-[#686EF8] text-white text-base font-medium py-3 px-6 rounded-md cursor-pointer'>View All</button>
                     </div>
-
-                    <div className='border rounded-lg'>
-                        <div className='p-5 pl-6'><img className='w-96 h-56 border rounded-md' src="https://i.postimg.cc/fWS3BrYP/projexl.avif" alt="#" /></div>
-                        <div className='flex justify-between px-6'><p className='text-[#1B2530 text-xl font-medium hover:text-[#686EF8] duration-150 cursor-pointer'>Projexl</p><CiBookmark data-tooltip-id="my-tooltip" data-tooltip-content="Bookmark" className='hover:text-[#6A6EF8] text-[26px] cursor-pointer text-[#79808A]'/>
-                        <Tooltip id="my-tooltip" />
-                        </div>
-                        <p className='text-[#79808A] pt-4 pb-5 px-5 text-base inter font-medium'>This is a comprehensive SaaS Boilerplate and <br /> Starter Kit for Next.js. It's a production-ready</p>
-                        <hr />
-                        <div className='flex gap-[175px] py-5 px-5'>
-                            <div className='flex gap-2 border px-4 py-2 cursor-pointer rounded-[5px] border-[#6A6EF8] items-center text-[#6A6EF8] text-base inter font-medium '><img className='' src={upvote} alt="#" />Upvote<span>11</span></div>
-                            <div className='flex items-center text-[#79808A] cursor-pointer text-base inter font-medium hover:text-[#6A6EF8] duration-200'>Visit Site<MdArrowOutward /></div>
-                        </div>
+                }
+                {!showAll && <hr />}
+                {!showAll && 
+                    <div className='grid grid-cols-2 gap-6 pt-14 pr-3'>
+                        {
+                            latestResources.map(product => <LatestResources key={product._id} product={product}></LatestResources>)
+                        }
                     </div>
-
-                    <div className='border rounded-lg'>
-                        <div className='p-5 pl-6'><img className='w-96 h-56 border rounded-md' src="https://i.postimg.cc/63v9LFFL/leadkit.avif" alt="#" /></div>
-                        <div className='flex justify-between px-6'><p className='text-[#1B2530 text-xl font-medium hover:text-[#686EF8] duration-150 cursor-pointer'>LeadKit</p><CiBookmark data-tooltip-id="my-tooltip" data-tooltip-content="Bookmark" className='hover:text-[#6A6EF8] text-[26px] cursor-pointer text-[#79808A]'/>
-                        <Tooltip id="my-tooltip" />
-                        </div>
-                        <p className='text-[#79808A] pt-4 pb-5 px-5 text-base inter font-medium'>This is a comprehensive SaaS Boilerplate and <br /> Starter Kit for Next.js. It's a production-ready</p>
-                        <hr />
-                        <div className='flex gap-[175px] py-5 px-5'>
-                            <div className='flex gap-2 border px-4 py-2 cursor-pointer rounded-[5px] border-[#6A6EF8] items-center text-[#6A6EF8] text-base inter font-medium '><img className='' src={upvote} alt="#" />Upvote<span>11</span></div>
-                            <div className='flex items-center text-[#79808A] cursor-pointer text-base inter font-medium hover:text-[#6A6EF8] duration-200'>Visit Site<MdArrowOutward /></div>
-                        </div>
-                    </div>
-
-                    <div className='border rounded-lg'>
-                        <div className='p-5 pl-6'><img className='w-96 h-56 border rounded-md' src="https://i.postimg.cc/85BYSHvg/opensql.avif" alt="#" /></div>
-                        <div className='flex justify-between px-6'><p className='text-[#1B2530 text-xl font-medium hover:text-[#686EF8] duration-150 cursor-pointer'>opensql.ai</p><CiBookmark data-tooltip-id="my-tooltip" data-tooltip-content="Bookmark" className='hover:text-[#6A6EF8] text-[26px] cursor-pointer text-[#79808A]'/>
-                        <Tooltip id="my-tooltip" />
-                        </div>
-                        <p className='text-[#79808A] pt-4 pb-5 px-5 text-base inter font-medium'>This is a comprehensive SaaS Boilerplate and <br /> Starter Kit for Next.js. It's a production-ready</p>
-                        <hr />
-                        <div className='flex gap-[175px] py-5 px-5'>
-                            <div className='flex gap-2 border px-4 py-2 cursor-pointer rounded-[5px] border-[#6A6EF8] items-center text-[#6A6EF8] text-base inter font-medium '><img className='' src={upvote} alt="#" />Upvote<span>11</span></div>
-                            <div className='flex items-center text-[#79808A] cursor-pointer text-base inter font-medium hover:text-[#6A6EF8] duration-200'>Visit Site<MdArrowOutward /></div>
-                        </div>
-                    </div>
-
-                    <div className='border rounded-lg'>
-                        <div className='p-5 pl-6'><img className='w-96 h-56 border rounded-md' src="https://i.postimg.cc/xjZvdm3w/iaskai.avif" alt="#" /></div>
-                        <div className='flex justify-between px-6'><p className='text-[#1B2530 text-xl font-medium hover:text-[#686EF8] duration-150 cursor-pointer'>iAsk.AI</p><CiBookmark data-tooltip-id="my-tooltip" data-tooltip-content="Bookmark" className='hover:text-[#6A6EF8] text-[26px] cursor-pointer text-[#79808A]'/>
-                        <Tooltip id="my-tooltip" />
-                        </div>
-                        <p className='text-[#79808A] pt-4 pb-5 px-5 text-base inter font-medium'>This is a comprehensive SaaS Boilerplate and <br /> Starter Kit for Next.js. It's a production-ready</p>
-                        <hr />
-                        <div className='flex gap-[175px] py-5 px-5'>
-                            <div className='flex gap-2 border px-4 py-2 cursor-pointer rounded-[5px] border-[#6A6EF8] items-center text-[#6A6EF8] text-base inter font-medium '><img className='' src={upvote} alt="#" />Upvote<span>11</span></div>
-                            <div className='flex items-center text-[#79808A] cursor-pointer text-base inter font-medium hover:text-[#6A6EF8] duration-200'>Visit Site<MdArrowOutward /></div>
-                        </div>
-                    </div>
-
-                    <div className='border rounded-lg'>
-                        <div className='p-5 pl-6'><img className='w-96 h-56 border rounded-md' src="https://i.postimg.cc/jdVhXNnz/passdropit.avif" alt="#" /></div>
-                        <div className='flex justify-between px-6'><p className='text-[#1B2530 text-xl font-medium hover:text-[#686EF8] duration-150 cursor-pointer'>Passdropit</p><CiBookmark data-tooltip-id="my-tooltip" data-tooltip-content="Bookmark" className='hover:text-[#6A6EF8] text-[26px] cursor-pointer text-[#79808A]'/>
-                        <Tooltip id="my-tooltip" />
-                        </div>
-                        <p className='text-[#79808A] pt-4 pb-5 px-5 text-base inter font-medium'>This is a comprehensive SaaS Boilerplate and <br /> Starter Kit for Next.js. It's a production-ready</p>
-                        <hr />
-                        <div className='flex gap-[175px] py-5 px-5'>
-                            <div className='flex gap-2 border px-4 py-2 cursor-pointer rounded-[5px] border-[#6A6EF8] items-center text-[#6A6EF8] text-base inter font-medium '><img className='' src={upvote} alt="#" />Upvote<span>11</span></div>
-                            <div className='flex items-center text-[#79808A] cursor-pointer text-base inter font-medium hover:text-[#6A6EF8] duration-200'>Visit Site<MdArrowOutward /></div>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     );

@@ -1,9 +1,3 @@
-
-import upvote from '../../assets/upvote.png';
-import { MdArrowOutward } from "react-icons/md";
-import { CiBookmark } from "react-icons/ci";
-import 'react-tooltip/dist/react-tooltip.css'
-import { Tooltip } from 'react-tooltip'
 import { AiOutlineUser } from "react-icons/ai";
 import { PiBookmarkSimpleLight } from "react-icons/pi";
 import { IoTriangleOutline } from "react-icons/io5";
@@ -14,13 +8,18 @@ import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import { CgEditBlackPoint } from "react-icons/cg";
 import { CiEdit } from "react-icons/ci";
+import {Link, Outlet} from 'react-router-dom';
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 
 
 const Dashboard = () => {
     const {user} = useContext(AuthContext);
 
     return (
-        <div className="flex gap-12 bg-[#F5F8F9] pt-32 border-t-[1px]">
+        <>
+        <Navbar></Navbar>
+            <div className="flex gap-12 bg-[#F5F8F9] pt-32 border-t-[1px]">
             <div className='border z-0 sticky left-0 top-0 h-full  overflow-y-auto bg-white text-[#1B2430] ml-10 mt-14 text-[18px] rounded-lg py-7 pl-8 pr-8'>
                 <div className='flex gap-2 mb-1 cursor-pointer py-3 rounded-md pl-4 pr-56 items-center hover:bg-[#686EF8] hover:text-white duration'><AiOutlineUser className='text-xl'/><span>Profile</span></div>
                 <div className='flex gap-2 py-3 rounded-md pl-4 hover:bg-[#686EF8] hover:text-white duration-200 mb-1 cursor-pointer pr-56 items-center'><PiBookmarkSimpleLight className='text-xl'/><span>Bookmarks</span></div>
@@ -50,17 +49,15 @@ const Dashboard = () => {
                     </div>
                     <h2 className='text-[#1B2530] text-[36px] font-medium py-9'>Your Submission</h2>
                     <div className='border flex justify-start gap-3 p-4 rounded bg-white'>
-                        <button className='bg-[#686EF8] py-2.5 px-6 text-white rounded'>Approved</button>
-                        <button className='bg-[#2C3743] px-5 rounded text-white'>Under Review</button>
-                        <button className='bg-[#2C3743] px-5 text-white rounded'>Rejected</button>
+                        <Link to="/dashboard/approved"><button className='bg-[#686EF8] py-2.5 px-6 text-white rounded'>Approved</button></Link>
+                        <Link to="/dashboard/underReview"><button className='bg-[#2C3743] px-5 py-2.5 rounded text-white'>Under Review</button></Link>
+                        <Link to="/dashboard/rejected"><button className='bg-[#2C3743] px-5 py-2.5 text-white rounded'>Rejected</button></Link>
                     </div>
-                    <div className='flex justify-center border py-28 rounded-md mt-8 bg-white'>
-                        <div><img className='mx-auto bg-[#686EF80D] rounded-full p-5' src="https://i.postimg.cc/7h42M6WJ/empty.png" alt="#" />
-                        <h3 className='text-[#000000] text-2xl font-medium pt-7'>OOOPS! It's Empty</h3>
-                        <p className='text-[#79808A] text-base font-normal'>There are no items to show</p></div>
-                    </div>
+                    <Outlet></Outlet>
             </div>
         </div>
+        <Footer></Footer>
+        </>
     );
 };
 

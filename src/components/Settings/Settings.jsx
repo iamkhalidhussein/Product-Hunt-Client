@@ -1,15 +1,36 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import { IoCloudUploadOutline } from "react-icons/io5";
+
 
 const Settings = () => {
     const {user} = useContext(AuthContext);
+    const [selectedImage, setSelectedImage] = useState(user.photoURL);
+
+    const handleImageChange = (e) => {
+        const imageFile = e.target.files[0];
+        if(imageFile) {
+            const imageUrl = URL.createObjectURL(imageFile);
+            setSelectedImage(imageUrl)
+        }
+    }
     return (
         <div className="pt-12">
             <h2 className="text-[#1B2530] text-[36px] pb-7 font-medium">Account Settings</h2>
             <div className="flex gap-10">
                 <div className="bg-white py-9 h-full px-10 border rounded">
                     <p className="text-[#1B2530] pb-6 text-base text-center inter">Change Your Profile Picture</p>
-                    <img className="rounded-full mb-5 mx-auto" src={user?.photoURL} alt="#" />
+                    <div className="relative">
+                        <div>
+                        {selectedImage &&
+                            <img className="rounded-full w-32 h-32 mb-5 mx-auto" src={selectedImage} alt="#" />
+                        }
+                        </div>
+                        <label className="absolute cursor-pointer -bottom-1 right-10" htmlFor="fileInput">
+                            <IoCloudUploadOutline className="text-xl"/>
+                        </label>
+                    </div>
+                    <input id="fileInput" className="hidden" type="file" accept="image/*" name="" onChange={handleImageChange} />
                     <div className="flex justify-center"><button className="bg-[#686EF8] py-3 px-6 rounded text-white">Change & Save</button></div>
                 </div>
                 <div className="border bg-white py-12 px-10">

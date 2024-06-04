@@ -17,7 +17,7 @@ const Profile = () => {
                                 <div className='flex items-center text-white bg-[#686EF8] justify-center rounded-3xl py-1 px-3'><CgEditBlackPoint className='text-xl mr-1'/><span className='mr-1'>0</span>Points</div>
                             </div>
                         </div>
-                        <div className='flex items-center bg-[#686EF8] px-3 py-1 rounded-sm  text-[18px] text-white font-normal gap-1'><CiEdit className='text-2xl'/><span>Edit</span></div>
+                        <Link to="/dashboard/settings" className='flex items-center bg-[#686EF8] px-3 py-1 rounded-sm  text-[18px] text-white font-normal gap-1'><CiEdit className='text-2xl'/><span>Edit</span></Link>
                     </div>
                     <h2 className='text-[#1B2530] text-[36px] font-medium py-9'>Your Submission</h2>
                     <div className='border flex justify-start gap-3 p-4 rounded bg-white'>

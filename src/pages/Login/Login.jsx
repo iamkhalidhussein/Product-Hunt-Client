@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from 'sweetalert2';
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 const Login = () => {
@@ -14,6 +15,7 @@ const Login = () => {
         setPassword(!password)
     }
 
+    const axiosPublic = useAxiosPublic();
     const {signIn, googleSignIn, githubSignIn, user} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
@@ -49,12 +51,22 @@ const Login = () => {
     const signInWithGoogle = () => {
         googleSignIn()
         .then((result) => {
-            console.log(result.user)
+            console.log(result.user);
+            const userInfo = {
+                email: result.user?.email,
+                name: result.user?.displayName
+            }
+            axiosPublic.post('/users', userInfo)
+            .then((res) => {
+                console.log(res.data);
+                navigate('/');
+            })
         })
         .catch((error) => {
-            console.log(error.message)
+            console.log(error);
         })
-    };
+    }
+
     
 
     //github sign in with popup

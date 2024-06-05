@@ -36,18 +36,12 @@ const AuthProvider = ({children}) => {
 
     const googleSignIn = () => {
         const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider)
-        .then((result) => {
-            console.log(result.user)
-        })
-        .catch((error) => {
-            console.log(error.message)
-        })
+        return signInWithPopup(auth, provider)
     }
 
     const githubSignIn = () => {
         const provider = new GithubAuthProvider();
-        signInWithPopup(auth, provider)
+        return signInWithPopup(auth, provider)
     }
 
     useEffect(() => {

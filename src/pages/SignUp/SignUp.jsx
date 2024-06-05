@@ -84,7 +84,16 @@ const SignUp = () => {
     const signInWithGoogle = () => {
         googleSignIn()
         .then((result) => {
-            console.log(result);
+            console.log(result.user);
+            const userInfo = {
+                email: result.user?.email,
+                name: result.user?.displayName
+            }
+            axiosPublic.post('/users', userInfo)
+            .then((res) => {
+                console.log(res.data);
+                navigate('/');
+            })
         })
         .catch((error) => {
             console.log(error);

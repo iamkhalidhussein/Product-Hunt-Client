@@ -14,6 +14,7 @@ import Bookmarks from '../components/Bookmarks/Bookmarks';
 import Upvotes from '../components/Upvotes/Upvotes';
 import Submissions from '../components/Submissions/Sumissions';
 import Settings from '../components/Settings/Settings';
+import ManageUsers from "../components/ManageUsers/ManageUsers";
 
 
 export const router = createBrowserRouter([
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
                 {
                     path: 'settings',
                     element: <Settings></Settings>
+                },
+                {
+                    path: 'adminManageUser',
+                    element: <ManageUsers></ManageUsers>
                 }
             ]
         },

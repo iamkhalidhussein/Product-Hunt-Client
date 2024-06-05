@@ -1,6 +1,7 @@
 import {useQuery} from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { FaUser } from 'react-icons/fa6';
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -8,10 +9,30 @@ const ManageUsers = () => {
     const {data: users = [], refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/users');
+            const res = await axiosSecure.get('/users', {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('access-token')}`
+                }
+            });
             return res.data;
         }
     });
+
+    const handleMakeAdmin = (user) => {
+        axiosSecure.patch(`/users/admin/${user._id}`)
+        .then((res) => {
+            console.log(res.data);
+            if(res.data.modifiedCount > 0) {
+                refetch();
+                Swal.fire({
+                    icon: "success",
+                    title: `${user.name} is an Admin Now`,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
+    }
 
     const handleDeleteUser = (user) => {
         // console.log(user)
@@ -31,7 +52,7 @@ const ManageUsers = () => {
                         refetch();
                         Swal.fire({
                             title: "Deleted!",
-                            text: "Your file has been deleted.",
+                            text: `${user.name} has been deleted.`,
                             icon: "success"
                         });
                     }
@@ -62,9 +83,10 @@ const ManageUsers = () => {
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>
-                        <button>
-                            Role
-                        </button>
+                        {user.role === 'admin' ? 'Admin' : <><button onClick={() => handleMakeAdmin(user)}>
+                            <FaUser></FaUser>
+                        </button></>
+                        }
                     </td>
                     <td>
                         <button onClick={() => handleDeleteUser(user)}>Delete</button>

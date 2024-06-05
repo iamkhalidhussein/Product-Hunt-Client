@@ -75,7 +75,7 @@ const Profile = () => {
                         </div>
                         <Link to="/dashboard/settings" className='flex items-center bg-[#686EF8] px-3 py-1 rounded-sm  text-[18px] text-white font-normal gap-1'><CiEdit className='text-2xl'/><span>Edit</span></Link>
                     </div>
-                    <h2 className='text-[#1B2530] text-[36px] font-medium py-9'>Your Submission</h2>
+                    <h2 className='text-[#1B2530] text-[36px] font-semibold py-9'>Your Submission</h2>
                     <div className='border flex justify-start gap-3 p-4 rounded bg-white'>
                         <div onClick={approved}><button id="approved-btn" className='bg-[#686EF8] py-2.5 px-6 text-white rounded'>Approved</button></div>
                         <div onClick={underReview}><button id="underReview-btn" className='bg-[#2C3743] px-5 py-2.5 rounded text-white'>Under Review</button></div>

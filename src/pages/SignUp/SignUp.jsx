@@ -5,7 +5,7 @@ import { IoEyeOffSharp, IoEyeOutline } from "react-icons/io5";
 import {Link, useNavigate} from 'react-router-dom';
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from 'sweetalert2';
-
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const SignUp = () => {
     const [password, setPassword] = useState(false);
@@ -13,6 +13,7 @@ const SignUp = () => {
         setPassword(!password)
     }
 
+    const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const {createUser, updateUserProfile, logOut, googleSignIn, githubSignIn} = useContext(AuthContext);
 
@@ -44,13 +45,24 @@ const SignUp = () => {
             //update user profile
             updateUserProfile(data.name, data.photoURL)
             .then((result) => {
-                console.log('user profile updated',result)
-                Swal.fire({
-                    icon: "success",
-                    title: "User Created Successfully!",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                //create user entry in the DB
+                const userInfo = {
+                    name: data.name,
+                    email: data.email,
+                }
+                axiosPublic.post('/users', userInfo)
+                .then((res) => {
+                    if(res.data.insertedId) {
+                        console.log('user profile updated',result)
+                        Swal.fire({
+                            icon: "success",
+                            title: "User Created Successfully!",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                })
+
             })
             .catch((error) => {
                 console.log(error.message)

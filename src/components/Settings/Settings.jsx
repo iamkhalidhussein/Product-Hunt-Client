@@ -16,7 +16,7 @@ const Settings = () => {
     }
     return (
         <div className="pt-12">
-            <h2 className="text-[#1B2530] text-[36px] pb-7 font-medium">Account Settings</h2>
+            <h2 className="text-[#1B2530] text-[36px] pb-7 font-semibold">Account Settings</h2>
             <div className="flex gap-10">
                 <div className="bg-white py-9 h-full px-10 border rounded">
                     <p className="text-[#1B2530] pb-6 text-base text-center inter">Change Your Profile Picture</p>

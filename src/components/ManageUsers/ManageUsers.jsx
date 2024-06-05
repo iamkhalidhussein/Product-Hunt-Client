@@ -2,6 +2,9 @@ import {useQuery} from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { FaUser } from 'react-icons/fa6';
+import { MdAddModerator } from "react-icons/md";
+
+
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -27,6 +30,22 @@ const ManageUsers = () => {
                 Swal.fire({
                     icon: "success",
                     title: `${user.name} is an Admin Now`,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
+    }
+
+    const handleMakeModerator = (user) => {
+        axiosSecure.patch(`/users/moderator/${user._id}`)
+        .then((res) => {
+            console.log(res.data);
+            if(res.data.modifiedCount > 0) {
+                refetch();
+                Swal.fire({
+                    icon: "success",
+                    title: `${user.name} is an Moderator Now`,
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -73,6 +92,7 @@ const ManageUsers = () => {
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
+                    <th>Moderator</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -84,8 +104,13 @@ const ManageUsers = () => {
                     <td>{user.email}</td>
                     <td>
                         {user.role === 'admin' ? 'Admin' : <><button onClick={() => handleMakeAdmin(user)}>
-                            <FaUser></FaUser>
+                            <FaUser className='text-xl'></FaUser>
                         </button></>
+                        }
+                    </td>
+                    <td>
+                        { user.moderator === true ? 'True' : 
+                            <button onClick={() => handleMakeModerator(user)} className='ml-3'><MdAddModerator className='text-xl'/></button>
                         }
                     </td>
                     <td>

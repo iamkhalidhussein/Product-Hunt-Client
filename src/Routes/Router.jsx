@@ -8,9 +8,6 @@ import Login from "../pages/Login/Login";
 import Dashboard from '../pages/Dashboard/Dashboard';
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
-import Approved from '../components/Approved/Approved';
-import UnderReview from '../components/UnderReview/UnderReview';
-import Rejected from '../components/Rejected/Rejected';
 import DashboardErrorPage from '../components/DashboardErrorPage/DashboardErrorPage';
 import Profile from '../components/Profile/Profile';
 import Bookmarks from '../components/Bookmarks/Bookmarks';
@@ -37,10 +34,6 @@ export const router = createBrowserRouter([
                 path: '/login',
                 element: <Login></Login>
             },
-            {
-                path: '/profile/approved',
-                element: <Approved></Approved>
-            },
         ]
         },
         {
@@ -48,14 +41,6 @@ export const router = createBrowserRouter([
             element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
             errorElement: <DashboardErrorPage></DashboardErrorPage>,
             children: [
-                {
-                    path: 'underReview',
-                    element: <UnderReview></UnderReview>
-                },
-                {
-                    path: 'rejected',
-                    element: <Rejected></Rejected>
-                },
                 {
                     path: 'profile',
                     element: <Profile></Profile>

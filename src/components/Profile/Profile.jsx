@@ -69,7 +69,7 @@ const Profile = () => {
                         <div className='flex gap-3 items-end'>
                             <img className='rounded-full w-[100px] h-[100px]' src={user.photoURL} alt="#" />
                             <div>
-                                <h3 className='text-[#1B2530] text-xl font-medium hover:text-[#686EF8] cursor-pointer pb-2'>Md Khalid</h3>
+                                <h3 className='text-[#1B2530] text-xl font-medium hover:text-[#686EF8] cursor-pointer pb-2'>{user.displayName}</h3>
                                 <div className='flex items-center text-white bg-[#686EF8] justify-center rounded-3xl py-1 px-3'><CgEditBlackPoint className='text-xl mr-1'/><span className='mr-1'>0</span>Points</div>
                             </div>
                         </div>

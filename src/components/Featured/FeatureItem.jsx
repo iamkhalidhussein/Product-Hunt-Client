@@ -2,7 +2,7 @@ import { MdArrowOutward } from "react-icons/md";
 import upvotee from '../../assets/upvote.png';
 
 const FeatureItem = ({product}) => {
-    console.log(product);
+    // console.log(product);
     const {_id, image, title, description, upvote, visit_site} = product;
     return (
         <div className="flex justify-center">

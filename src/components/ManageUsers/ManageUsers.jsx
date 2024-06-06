@@ -79,9 +79,9 @@ const ManageUsers = () => {
                 }
             });
     }
-    return (
-        <div>
-            <h3>Manage users: {users.length}</h3>
+    return ( 
+        <div className='mt-12'>
+            <h3 className='text-[#1B2530] text-[36px] font-semibold'>Manage users: {users.length}</h3>
 
             <div className="overflow-x-auto">
             <table className="table">
@@ -91,7 +91,7 @@ const ManageUsers = () => {
                     <th></th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Role</th>
+                    <th>Admin</th>
                     <th>Moderator</th>
                     <th>Action</th>
                 </tr>
@@ -103,7 +103,7 @@ const ManageUsers = () => {
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>
-                        {user.role === 'admin' ? 'Admin' : <><button onClick={() => handleMakeAdmin(user)}>
+                        {user.role === 'admin' ? 'True' : <><button onClick={() => handleMakeAdmin(user)}>
                             <FaUser className='text-xl'></FaUser>
                         </button></>
                         }

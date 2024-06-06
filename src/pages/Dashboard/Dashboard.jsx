@@ -13,6 +13,7 @@ import { FaHome } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
 import useAdmin from "../../hooks/useAdmin";
 import useModerator from "../../hooks/useModerator";
+import { AiFillProduct } from "react-icons/ai";
 
 
 
@@ -37,7 +38,7 @@ const Dashboard = () => {
         }
 
         if(!isModerator[0] && !isAdmin[0]) {
-            navigate('/dashboard/profile')
+            navigate('/dashboard/userProfile')
         }
         if(isModerator[0] && isAdmin[0]) {
             navigate('/dashboard/adminHome')
@@ -94,10 +95,9 @@ const Dashboard = () => {
 
                 {
                     !isAdmin[0] && !isModerator[0] ? <>
-                    <Link to="/dashboard/profile" className={`flex gap-2 mb-1 cursor-pointer py-3 rounded-md pl-4 pr-56 items-center hover:bg-[#686EF8] hover:text-white duration ${activeRoute === '/dashboard/profile' ? 'bg-[#686EF8] text-white' : null}`}><AiOutlineUser className='text-xl'/><span>Profile</span></Link>
-                    <Link to="/dashboard/bookmarks" className={`flex gap-2 py-3 rounded-md pl-4 hover:bg-[#686EF8] hover:text-white duration-200 mb-1 cursor-pointer pr-56 items-center ${activeRoute === '/dashboard/bookmarks' ? 'bg-[#686EF8] text-white' : null}`}><PiBookmarkSimpleLight className='text-xl'/><span>Bookmarks</span></Link>
-                    <Link to="/dashboard/upvotes" className={`flex gap-2 py-3 rounded-md pl-4 hover:bg-[#686EF8] hover:text-white duration-200 mb-1 cursor-pointer pr-56 items-center ${activeRoute === '/dashboard/upvotes' ? 'bg-[#686EF8] text-white' : null}`}><IoTriangleOutline className='text-xl'/><span>Upvotes</span></Link>
-                    <Link to="/dashboard/submissions" className={`flex gap-2 py-3 rounded-md pl-4 hover:bg-[#686EF8] hover:text-white duration-200 mb-1 cursor-pointer pr-56 items-center ${activeRoute === '/dashboard/submissions' ? 'bg-[#686EF8] text-white' : null}`}><RxPlus className='text-xl'/><span>Submissions</span></Link>
+                    <Link to="/dashboard/userProfile" className={`flex gap-2 mb-1 cursor-pointer py-3 rounded-md pl-4 pr-56 items-center hover:bg-[#686EF8] hover:text-white duration ${activeRoute === '/dashboard/userProfile' ? 'bg-[#686EF8] text-white' : null}`}><AiOutlineUser className='text-xl'/><span>Profile</span></Link>
+                    <Link to="/dashboard/submissions" className={`flex gap-2 py-3 rounded-md pl-4 hover:bg-[#686EF8] hover:text-white duration-200 mb-1 cursor-pointer pr-56 items-center ${activeRoute === '/dashboard/submissions' ? 'bg-[#686EF8] text-white' : null}`}><RxPlus className='text-xl'/><span>Add Product</span></Link>
+                    <Link to="/dashboard/upvotes" className={`flex gap-2 py-3 rounded-md pl-4 hover:bg-[#686EF8] hover:text-white duration-200 mb-1 cursor-pointer pr-56 items-center ${activeRoute === '/dashboard/upvotes' ? 'bg-[#686EF8] text-white' : null}`}><AiFillProduct className='text-xl'/><span>My Products</span></Link>
                     <Link to="/dashboard/settings" className={`flex gap-2 py-3 rounded-md pl-4 hover:bg-[#686EF8] hover:text-white duration-200 mb-1 cursor-pointer pr-56 items-center ${activeRoute === '/dashboard/settings' ? 'bg-[#686EF8] text-white' : null}`}><IoSettingsOutline className='text-xl'/><span>Settings</span></Link>
                     <div className='flex rounded-md bg-[#F5F8F9] mt-10 p-3 gap-2'>
                         <img className='w-[60px] h-[60px] rounded-full' src={user.photoURL} alt="#" />

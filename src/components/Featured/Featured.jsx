@@ -26,29 +26,43 @@ import webDev from '../../assets/web-development.png';
 import webTemplate from '../../assets/web-templates.png';
 import web3 from '../../assets/web3.png';
 import 'react-tooltip/dist/react-tooltip.css'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import FeatureItem from './FeatureItem';
 import LatestResources from './LatestResources';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 
 
 const Featured = () => {
-    const [featuredProducts, setFeaturedProducts] = useState([]);
-    const [latestResources, setLatestResources] = useState([]);
     const [showAll, setShowAll] = useState(false);
+    const axiosPublic = useAxiosPublic();
     
-    useEffect(() => {
-        fetch('http://localhost:5000/featured-products')
-        .then(res => res.json())
-        .then(data => setFeaturedProducts(data))
-    }, [])
+    const {data: featuredProducts = [], refetch: refetchFeaturedProducts} = useQuery({
+        queryKey: ['userrs'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/featured-products', {
+            });
+            return res.data;
+        }
+    });
+    console.log(featuredProducts)
 
-    useEffect(() => {
-        fetch('http://localhost:5000/latest-resources')
-        .then(res => res.json())
-        .then(data => setLatestResources(data))
-    }, [])
-
+    
+    const {data: latestResources = [], refetch: refetchLatestResources} = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/latest-resources', {
+            });
+            return res.data;
+        }
+    });
+    // console.log(latestResources)
+    
+    const handleRefetch = () => {
+        refetchFeaturedProducts();
+        refetchLatestResources();
+    }
 
     const handleShowAll = () => {
         setShowAll(true)
@@ -98,8 +112,8 @@ const Featured = () => {
 
                 <div className='grid grid-cols-2 pt-12 gap-5'>
                     { showAll ?
-                        featuredProducts.map(product => <FeatureItem key={product._id} product={product}></FeatureItem>) :
-                        featuredProducts.slice(0, 2).map(product => <FeatureItem key={product._id} product={product}></FeatureItem>)
+                        featuredProducts.map(product => <FeatureItem key={product._id} product={product} handleRefetch={handleRefetch}></FeatureItem>) :
+                        featuredProducts.slice(0, 2).map(product => <FeatureItem key={product._id} product={product} handleRefetch={handleRefetch}></FeatureItem>)
                     }
                 </div>
 
@@ -114,7 +128,7 @@ const Featured = () => {
                 {!showAll && 
                     <div className='grid grid-cols-2 gap-6 pt-14 pr-3'>
                         {
-                            latestResources.map(product => <LatestResources key={product._id} product={product}></LatestResources>)
+                            latestResources.map(product => <LatestResources key={product._id} product={product} handleRefetch={handleRefetch}></LatestResources>)
                         }
                     </div>
                 }

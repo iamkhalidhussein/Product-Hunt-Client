@@ -3,28 +3,22 @@ import { MdArrowOutward } from "react-icons/md";
 import { Tooltip } from "react-tooltip";
 import upvotee from '../../assets/upvote.png';
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 
 
-const LatestResources = ({product}) => {
+const LatestResources = ({product, handleRefetch}) => {
     const {user} = useContext(AuthContext);
-    // console.log(product);
-    const {_id, image, title, description, upvote, visit_site} = product;
     const axiosPublic = useAxiosPublic();
-    const { refetch } = useQuery({
-        queryKey: ['users'],
-        queryFn: useAxiosPublic,
-        staleTime: 0, // Assuming useAxiosPublic fetches user data
-    });
-
+    const {_id, image, title, description, upvote, visit_site} = product;
+    // console.log(product);
+    
     const handleUpvoteCount = (_id) => {
         axiosPublic.patch(`/users/${user.email}/${_id}`)
         .then((res) => {
             console.log(res.data);
             if (res.data.modifiedCount > 0) {
-                refetch(); // Trigger refetch after successful upvote
+                handleRefetch()
             }
         })
         .catch(error => console.error('Error upvoting:', error));

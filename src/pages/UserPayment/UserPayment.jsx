@@ -6,8 +6,8 @@ import CheckoutForm from '../../components/CheckOutForm/CheckoutForm';
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_pk)
 const UserPayment = () => {
     return (
-        <div>
-            <h2>user payment</h2>
+        <div className='mt-12 '>
+            <h2>Subscribe only for 50 USD (LifeTime)</h2>
             <Elements stripe={stripePromise}>
                 <CheckoutForm></CheckoutForm>
             </Elements>

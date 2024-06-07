@@ -1,13 +1,32 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const UserProfile = () => {
     const {user} = useContext(AuthContext);
+    const axiosPublic = useAxiosPublic();
+    const [isSubscribe, setIsSubscribe] = useState();
 
-    const isSubscribe = false;
+    useEffect(() => {
+    axiosPublic.get(`/users/paymentinfo/${user.email}`)
+    .then((res) => {
+        console.log(res.data)
+        if(res.data.email) {
+            setIsSubscribe(true)
+        }
+        else {
+            setIsSubscribe(false)
+        }
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+    }, [])
+
+    // const isSubscribe = false;
     return (
         <div>
             <div>

@@ -1,11 +1,26 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
 
 const CheckoutForm = () => {
     const [error, setError] = useState('');
-
+    const [clientSecret, setClientSecret] = useState('');
+    const [transactionId, setTransactionId] = useState('');
+    const {user} = useAuth();
     const stripe = useStripe();
     const elements = useElements();
+    const axiosSecure = useAxiosSecure();
+    const totalPrice = 50;
+
+    useEffect(() => {
+        axiosSecure.post('/create-payment-intent', {price: totalPrice})
+        .then((res) => {
+            console.log(res.data.clientSecret);
+            setClientSecret(res.data.clientSecret)
+        })
+        console.log(totalPrice)
+    }, [axiosSecure, totalPrice])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,6 +47,27 @@ const CheckoutForm = () => {
             console.log('payment method', paymentMethod)
             setError('');
         }
+
+        // confirm payment 
+        const {paymentIntent, error: confirmError} = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    email: user?.email || 'anonymous',
+                    name: user?.displayName || 'anonymous'
+                }
+            }
+        })
+        if(confirmError) {
+            console.log('confirm error')
+        }
+        else {
+            console.log('payment intent',paymentIntent)
+            if(paymentIntent.status === 'succeeded') {
+                console.log('transaction id', paymentIntent.id)
+                setTransactionId(paymentIntent.id)
+            }
+        }
     }
     return (
         <div>
@@ -40,20 +76,22 @@ const CheckoutForm = () => {
             options={{
                 style: {
                     base: {
-                        fontSize: '16px', 
-                        color: '#424770',
-                        '::placeholder': {
-                            color: '#aab7c4',
-                        }
+                        // fontSize: '16px', 
+                        // color: '#424770',
+                        // '::placeholder': {
+                        //     color: '#aab7c4',
+                        // }
                     },
                     invalid: {
-                        color: '#9e2146'
+                        // color: '#9e2146'
                     }
                 }
             }}
             />
-            <button className='btn btn-sm btn-primary my-3' type='submit' disabled={!stripe}>Pay</button>
+
+            <button className='btn btn-sm btn-primary my-3' type='submit' disabled={!stripe || !clientSecret}>Pay</button>
             <p className="text-red-600">{error}</p>
+            {transactionId && <p className="text-green-600">Your Transaction Id:  {transactionId}</p>}
             </form>
         </div>
     );

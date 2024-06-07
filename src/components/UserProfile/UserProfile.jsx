@@ -20,8 +20,8 @@ const UserProfile = () => {
                             </div>
                         </div>
                         { isSubscribe ? 
-                            <Link to="/dashboard/settings" className='flex items-center bg-[#686EF8] px-3 py-1 rounded-sm  text-[18px] text-white font-normal gap-1'><CiEdit className='text-2xl'/><span>Subscribed</span></Link> :
-                            <Link to="/dashboard/settings" className='flex items-center bg-[#686EF8] px-3 py-1 rounded-sm  text-[18px] text-white font-normal gap-1'><CiEdit className='text-2xl'/><span>Subscribe</span></Link>
+                            <button className='flex items-center bg-[#686EF8] px-3 py-1 rounded-sm  text-[18px] text-white font-normal gap-1'><CiEdit className='text-2xl'/><span>Subscribed</span></button> :
+                            <Link to="/dashboard/userPayment" className='flex items-center bg-[#686EF8] px-3 py-1 rounded-sm  text-[18px] text-white font-normal gap-1'><CiEdit className='text-2xl'/><span>Subscribe</span></Link>
                         }
                     </div>
             </div>

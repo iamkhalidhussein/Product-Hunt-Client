@@ -46,7 +46,7 @@ const Featured = () => {
             return res.data;
         }
     });
-    console.log(featuredProducts)
+    // console.log(featuredProducts)
 
     
     const {data: latestResources = [], refetch: refetchLatestResources} = useQuery({

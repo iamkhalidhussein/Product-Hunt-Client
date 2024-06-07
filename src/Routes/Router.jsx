@@ -17,6 +17,7 @@ import Settings from '../components/Settings/Settings';
 import ManageUsers from "../components/ManageUsers/ManageUsers";
 import AdminHome from '../components/AdminHome/AdminHome';
 import UserProfile from '../components/UserProfile/UserProfile';
+import UserPayment from '../pages/UserPayment/UserPayment';
 
 export const router = createBrowserRouter([
         {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
                 {
                     path: 'userProfile',
                     element: <UserProfile></UserProfile>
+                },
+                {
+                    path: 'userPayment',
+                    element: <UserPayment></UserPayment>
                 },
                 {
                     path: 'bookmarks',

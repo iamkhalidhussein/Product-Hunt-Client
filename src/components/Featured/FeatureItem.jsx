@@ -3,14 +3,20 @@ import upvotee from '../../assets/upvote.png';
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const FeatureItem = ({product, handleRefetch}) => {
     // console.log(product);
     const {user} = useContext(AuthContext);
     const {_id, image, title, description, upvote, visit_site} = product;
     const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
     const handleUpvoteCount = (_id) => {
+        if(!user) {
+            return navigate('/login');
+        }
+        
         axiosPublic.patch(`/userrs/${user.email}/${_id}`)
         .then((res) => {
             console.log(res.data, _id);

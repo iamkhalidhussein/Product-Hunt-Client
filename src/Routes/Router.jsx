@@ -20,6 +20,7 @@ import UserProfile from '../components/UserProfile/UserProfile';
 import UserPayment from '../pages/UserPayment/UserPayment';
 import AddProductPage from '../components/AddProductPage/AddProductPage';
 import MyProducts from '../components/UserMyProducts/MyProducts'
+import UserAccountSetting from "../components/UserAccountSetting/UserAccountSetting";
 
 export const router = createBrowserRouter([
         {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
                 {
                     path: 'userPayment',
                     element: <UserPayment></UserPayment>
+                },
+                {
+                    path: 'userAccountSetting',
+                    element: <UserAccountSetting></UserAccountSetting>
                 },
                 {
                     path: 'bookmarks',

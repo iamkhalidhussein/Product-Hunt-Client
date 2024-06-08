@@ -48,7 +48,7 @@ const AddProductPage = () => {
         console.log(res.data)
         if(res.data.success) {
             const random = Math.floor(Math.random() * 20 + 1);
-            console.log(typeof random)
+            // console.log(typeof random)
             const userProduct = {
                 image: res.data.data.display_url,
                 title: product_data.product_title,

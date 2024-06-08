@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import {GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile} from 'firebase/auth';
 import {app} from '../firebase/firebase.config';
 import useAxiosPublic from '../hooks/useAxiosPublic';
+import Swal from "sweetalert2";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app)
@@ -27,14 +28,40 @@ const AuthProvider = ({children}) => {
     }
 
     const updateUserProfile = (name, photoURL) => {
-    return updateProfile(auth.currentUser, {
+        return updateProfile(auth.currentUser, {
             displayName: name, 
             photoURL: photoURL
         })
         .then((result) => {
-            console.log(result)
+            console.log("User profile updated successfully:", result);
+            return result;
         })
+        .catch((error) => {
+            console.error("Error updating user profile:", error);
+            throw error;
+        });
     }
+    
+    const updateUserProfilePic = (photoURL) => {
+        return updateProfile(auth.currentUser, {
+            photoURL: photoURL
+        })
+        .then((result) => {
+            Swal.fire({
+                icon: "success",
+                title: "User Profile Updated Successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            console.log("User profile updated successfully:", result);
+            return result;
+        })
+        .catch((error) => {
+            console.error("Error updating user profile:", error);
+            throw error;
+        });
+    }
+    
 
     const googleSignIn = () => {
         const provider = new GoogleAuthProvider();
@@ -77,6 +104,7 @@ const AuthProvider = ({children}) => {
         signIn,
         logOut,
         updateUserProfile,
+        updateUserProfilePic,
         googleSignIn,
         githubSignIn
     }

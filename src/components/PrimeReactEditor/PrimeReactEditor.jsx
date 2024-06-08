@@ -4,6 +4,7 @@ import { useState } from 'react';
 const PrimeReactEditor = () => {
     const [text, setText] = useState('');
 
+    // console.log(text)
     return (
         <div>
                 <div className="card" style={{width: '810px', borderRadius: '0',  backgroundColor: 'white'}}>

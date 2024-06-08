@@ -4,6 +4,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const FeatureItem = ({product, handleRefetch}) => {
     // console.log(product);
@@ -20,6 +21,13 @@ const FeatureItem = ({product, handleRefetch}) => {
         axiosPublic.patch(`/userrs/${user.email}/${_id}`)
         .then((res) => {
             console.log(res.data, _id);
+            if(res.data === true) {
+                Swal.fire({
+                    title: "Reminder",
+                    text: "No Voting for Your Own Product",
+                    icon: "warning"
+                });
+            }
             if (res.data.modifiedCount > 0) {
                 handleRefetch();
             }

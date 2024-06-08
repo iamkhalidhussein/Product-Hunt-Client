@@ -16,7 +16,7 @@ const FileUpload = () => {
                     <Upload.Text>
                     <p className="text-[#79808A] text-base inter font-normal">Drop image here</p>
                     <p className='text-[#79808A] text-base inter font-normal'>Or</p>
-                    <button className="bg-[#79808A] text-base text-white py-2 rounded px-7">Browse</button>
+                    <div className="bg-[#79808A] cursor-pointer text-base text-white py-2 rounded px-7">Browse</div>
                     </Upload.Text>
                 </Upload.Body>
                 <Upload.Footer isFileExists={files.length > 0}>

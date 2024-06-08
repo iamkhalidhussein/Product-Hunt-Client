@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lexend:wght@100..900&display=swap');
+@import "keep-react/css";
 
 body {
     font-family: 'Lexend', sans-serif;
@@ -8,7 +9,6 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-@import "keep-react/css";
 
 @tailwind base;
 @tailwind components;

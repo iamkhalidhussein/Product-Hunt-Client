@@ -19,7 +19,7 @@ import AdminHome from '../components/AdminHome/AdminHome';
 import UserProfile from '../components/UserProfile/UserProfile';
 import UserPayment from '../pages/UserPayment/UserPayment';
 import AddProductPage from '../components/AddProductPage/AddProductPage';
-
+import MyProducts from '../components/UserMyProducts/MyProducts'
 
 export const router = createBrowserRouter([
         {
@@ -57,6 +57,10 @@ export const router = createBrowserRouter([
                 {
                     path: 'addProductPage',
                     element: <AddProductPage></AddProductPage>
+                },
+                {
+                    path: 'userMyProducts',
+                    element: <MyProducts></MyProducts>
                 },
                 {
                     path: 'userPayment',

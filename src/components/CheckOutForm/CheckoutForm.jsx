@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
     const [error, setError] = useState('');
@@ -10,6 +11,7 @@ const CheckoutForm = () => {
     const [transactionId, setTransactionId] = useState('');
     const {user} = useAuth();
     const stripe = useStripe();
+    const navigate = useNavigate();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
@@ -79,6 +81,8 @@ const CheckoutForm = () => {
                                     .catch((error) => {
                                         console.log(error);
                                     });
+
+                                    navigate('/dashboard/userProfile')
                                 }
                             }
                         })

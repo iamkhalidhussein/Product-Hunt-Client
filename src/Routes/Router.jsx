@@ -18,6 +18,8 @@ import ManageUsers from "../components/ManageUsers/ManageUsers";
 import AdminHome from '../components/AdminHome/AdminHome';
 import UserProfile from '../components/UserProfile/UserProfile';
 import UserPayment from '../pages/UserPayment/UserPayment';
+import AddProductPage from '../components/AddProductPage/AddProductPage';
+
 
 export const router = createBrowserRouter([
         {
@@ -51,6 +53,10 @@ export const router = createBrowserRouter([
                 {
                     path: 'userProfile',
                     element: <UserProfile></UserProfile>
+                },
+                {
+                    path: 'addProductPage',
+                    element: <AddProductPage></AddProductPage>
                 },
                 {
                     path: 'userPayment',

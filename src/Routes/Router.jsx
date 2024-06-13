@@ -21,6 +21,12 @@ import UserPayment from '../pages/UserPayment/UserPayment';
 import AddProductPage from '../components/AddProductPage/AddProductPage';
 import MyProducts from '../components/UserMyProducts/MyProducts'
 import UserAccountSetting from "../components/UserAccountSetting/UserAccountSetting";
+import ProductReview from '../components/ProductReview/ProductReview';
+import ReportedContent from '../components/ReportedContent/ReportedContent';
+import PaymentSuccess from '../components/UserPaymentSuccess/PaymentSuccess';
+import PaymentFailed from '../components/UserPaymentFailed/PaymentFailed';
+import PaymentCancel from '../components/UserPaymentCancel/PaymentCancel';
+
 
 export const router = createBrowserRouter([
         {
@@ -40,6 +46,19 @@ export const router = createBrowserRouter([
                 path: '/login',
                 element: <Login></Login>
             },
+            //ssl commerz payment related routes and components
+            {   
+                path: 'success',
+                element: <PaymentSuccess></PaymentSuccess>
+            },
+            {   
+                path: 'failed',
+                element: <PaymentFailed></PaymentFailed>
+            },
+            {   
+                path: 'cancel',
+                element: <PaymentCancel></PaymentCancel>
+            }
         ]
         },
         {
@@ -72,6 +91,14 @@ export const router = createBrowserRouter([
                     element: <UserAccountSetting></UserAccountSetting>
                 },
                 {
+                    path: 'productReviewPage',
+                    element: <ProductReview></ProductReview>
+                },
+                {
+                    path: 'reportedContentPage',
+                    element: <ReportedContent></ReportedContent>
+                },
+                {
                     path: 'bookmarks',
                     element: <Bookmarks></Bookmarks>
                 },
@@ -94,7 +121,7 @@ export const router = createBrowserRouter([
                 {
                     path: 'adminHome',
                     element: <AdminHome></AdminHome>
-                }
+                },
             ]
         },
     ]);

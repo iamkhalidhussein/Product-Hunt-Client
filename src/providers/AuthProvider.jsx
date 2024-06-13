@@ -61,6 +61,28 @@ const AuthProvider = ({children}) => {
             throw error;
         });
     }
+    const updateUserProfileInfo = (name, username, bio, website) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name,
+            username: username, 
+            bio: bio,
+            website_url: website
+        })
+        .then((result) => {
+            Swal.fire({
+                icon: "success",
+                title: "User Profile Info Updated Successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            console.log("User profile updated successfully:", result);
+            return result;
+        })
+        .catch((error) => {
+            console.error("Error updating user profile:", error);
+            throw error;
+        });
+    }
     
 
     const googleSignIn = () => {
@@ -105,6 +127,7 @@ const AuthProvider = ({children}) => {
         logOut,
         updateUserProfile,
         updateUserProfilePic,
+        updateUserProfileInfo,
         googleSignIn,
         githubSignIn
     }

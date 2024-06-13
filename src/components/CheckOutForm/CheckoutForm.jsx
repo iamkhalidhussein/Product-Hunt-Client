@@ -28,79 +28,93 @@ const CheckoutForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        
+        axiosPublic.post('http://localhost:5000/create-payment', {
+            ammount: 3000,
+            currenccy: 'BDT'
+        })
+        .then((res) => {
+            console.log(res.data);
+            const reDirectUrl = res.data.paymentUrl;
+            if(reDirectUrl) {
+                window.location.replace(reDirectUrl);
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+        // axiosPublic.get(`/users/paymentinfo/${user.email}`)
+        //     .then((res) => {
+        //         console.log(res.data);
+        //         if (!res.data.email) {
+        //             if (!stripe || !elements) {
+        //                 return;
+        //             }
     
-        axiosPublic.get(`/users/paymentinfo/${user.email}`)
-            .then((res) => {
-                console.log(res.data);
-                if (!res.data.email) {
-                    if (!stripe || !elements) {
-                        return;
-                    }
+        //             const card = elements.getElement(CardElement);
+        //             if (card === null) {
+        //                 return;
+        //             }
     
-                    const card = elements.getElement(CardElement);
-                    if (card === null) {
-                        return;
-                    }
+        //             stripe.createPaymentMethod({
+        //                 type: 'card',
+        //                 card
+        //             })
+        //             .then(({ error, paymentMethod }) => {
+        //                 if (error) {
+        //                     console.log('payment error', error);
+        //                     setError(error.message);
+        //                 } else {
+        //                     console.log('payment method', paymentMethod);
+        //                     setError('');
+        //                 }
     
-                    stripe.createPaymentMethod({
-                        type: 'card',
-                        card
-                    })
-                    .then(({ error, paymentMethod }) => {
-                        if (error) {
-                            console.log('payment error', error);
-                            setError(error.message);
-                        } else {
-                            console.log('payment method', paymentMethod);
-                            setError('');
-                        }
-    
-                        // confirm payment
-                        stripe.confirmCardPayment(clientSecret, {
-                            payment_method: {
-                                card: card,
-                                billing_details: {
-                                    email: user?.email || 'anonymous',
-                                    name: user?.displayName || 'anonymous'
-                                }
-                            }
-                        })
-                        .then(({ paymentIntent, error: confirmError }) => {
-                            if (confirmError) {
-                                console.log('confirm error');
-                            } else {
-                                console.log('payment intent', paymentIntent);
-                                if (paymentIntent.status === 'succeeded') {
-                                    console.log('transaction id', paymentIntent.id);
-                                    setTransactionId(paymentIntent.id);
+        //                 // confirm payment
+        //                 stripe.confirmCardPayment(clientSecret, {
+        //                     payment_method: {
+        //                         card: card,
+        //                         billing_details: {
+        //                             email: user?.email || 'anonymous',
+        //                             name: user?.displayName || 'anonymous'
+        //                         }
+        //                     }
+        //                 })
+        //                 .then(({ paymentIntent, error: confirmError }) => {
+        //                     if (confirmError) {
+        //                         console.log('confirm error');
+        //                     } else {
+        //                         console.log('payment intent', paymentIntent);
+        //                         if (paymentIntent.status === 'succeeded') {
+        //                             console.log('transaction id', paymentIntent.id);
+        //                             setTransactionId(paymentIntent.id);
                     
-                                    axiosPublic.post(`/users/payment/${user.email}`)
-                                    .then((res) => {
-                                        console.log(res.data);
-                                    })
-                                    .catch((error) => {
-                                        console.log(error);
-                                    });
+        //                             axiosPublic.post(`/users/payment/${user.email}`)
+        //                             .then((res) => {
+        //                                 console.log(res.data);
+        //                             })
+        //                             .catch((error) => {
+        //                                 console.log(error);
+        //                             });
 
-                                    navigate('/dashboard/userProfile')
-                                }
-                            }
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
-                    })
-                    .catch((error) => {
-                        console.log('payment method creation error', error);
-                    });
-                } else {
-                    console.log('user payment already have done');
-                    return;
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        //                             navigate('/dashboard/userProfile')
+        //                         }
+        //                     }
+        //                 })
+        //                 .catch((error) => {
+        //                     console.log(error);
+        //                 });
+        //             })
+        //             .catch((error) => {
+        //                 console.log('payment method creation error', error);
+        //             });
+        //         } else {
+        //             console.log('user payment already have done');
+        //             return;
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
     };
     
     return (

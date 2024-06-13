@@ -1,21 +1,21 @@
 import { useContext } from "react";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
-const MyProducts = () => {
-    const axiosSecure = useAxiosSecure();
+const ProductReview = () => {
+    const axiosPublic = useAxiosPublic();
     const {user} = useContext(AuthContext);
 
-    const {data: userProducts = [], refetch} = useQuery({
-        queryKey: ['users'],
+    const {data: userProductss = [], refetch} = useQuery({
+        queryKey: ['userss'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users/getSubmittedProduct/${user.email}`, {
+            const res = await axiosPublic.get(`/users/getSubmittedProduct/${user.email}`, {
             });
             return res.data;
         }
     });
-    console.log(userProducts)
+    console.log(userProductss)
     return (
         <div className="mt-12">
             <h3 className="text-[#1B2530] text-[35px] font-medium">My Products</h3>
@@ -34,7 +34,7 @@ const MyProducts = () => {
                 </thead>
                 <tbody>
                 {
-                    userProducts.map((product,idx) => 
+                    userProductss.map((product,idx) => 
                     <tr key={product._id}>
                         <th>{idx+1}</th>
                         <td>{product.title}</td>
@@ -51,4 +51,4 @@ const MyProducts = () => {
     );
 };
 
-export default MyProducts;
+export default ProductReview;

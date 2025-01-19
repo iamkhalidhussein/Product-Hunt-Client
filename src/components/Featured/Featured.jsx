@@ -6,7 +6,7 @@ import LatestResources from './LatestResources';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../hooks/useAxiosPublic.js';
 import CategoryItem from './CategoryItem.jsx';
-import categories from '../../../public/categories/categories.json';
+import categories from './categories/categories.json';
 import PropTypes from 'prop-types';
 
 const Featured = () => {
@@ -79,7 +79,7 @@ const Featured = () => {
         }
     };
 
-    console.log('isshowall', showAll)
+    // console.log('isshowall', showAll)
     return (
         <div className="md:flex gap-12 bg-[#F5F8F9] dark:bg-black pt-5 pb-10 border-t-[1px]">
             <div className='border md:z-0 md:sticky left-0 top-0 h-screen md:w-[650px] overflow-y-auto bg-white dark:bg-black text-[#1B2430] ml-10 mt-14 text-[18px] rounded-lg py-7 pl-10 pr-8'>

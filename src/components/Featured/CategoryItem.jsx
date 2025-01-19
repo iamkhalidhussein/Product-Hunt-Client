@@ -12,6 +12,6 @@ const CategoryItem = ({ icon, label }) => {
 export default CategoryItem;
 
 CategoryItem.propTypes = {
-    icon: PropTypes.object,
+    icon: PropTypes.string,
     label: PropTypes.string
 };

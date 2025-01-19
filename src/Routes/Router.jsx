@@ -1,3 +1,5 @@
+// import { lazy } from "react";
+// const Dashboard = lazy(() => import('../pages/Dashboard/Dashboard'));
 import {
     createBrowserRouter,
     } from "react-router-dom";
@@ -48,22 +50,22 @@ export const router = createBrowserRouter([
             },
             //ssl commerz payment related routes and components
             {   
-                path: 'success',
+                path: 'payment/success',
                 element: <PaymentSuccess></PaymentSuccess>
             },
             {   
-                path: 'failed',
+                path: 'payment/failed',
                 element: <PaymentFailed></PaymentFailed>
             },
             {   
-                path: 'cancel',
+                path: 'payment/cancel',
                 element: <PaymentCancel></PaymentCancel>
             }
         ]
         },
         {
             path: '/dashboard',
-            element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+            element: <PrivateRoute><Dashboard/></PrivateRoute>,
             errorElement: <DashboardErrorPage></DashboardErrorPage>,
             children: [
                 {

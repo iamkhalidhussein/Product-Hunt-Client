@@ -4,12 +4,11 @@ import CheckoutForm from '../../components/CheckOutForm/CheckoutForm';
 import { IoCheckmark } from "react-icons/io5";
 import { CgSmile } from "react-icons/cg";
 
+const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_pk);
 
-//TODO: add publishable key
-const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_pk)
 const UserPayment = () => {
     return (
-        <div className='mt-12 '>
+        <div className='mt-12'>
             <div className='w-10/12 border-[#686EF8] border-[5px] rounded-xl mb-4'>
                 <div className='flex justify-between items-center py-4 px-5'>
                     <div className='flex items-center gap-5'>
@@ -25,26 +24,25 @@ const UserPayment = () => {
                 </div>
                 <div className="w-11/12 mx-auto pb-5">
                     <table className="table rounded-t-3xl">
-                        {/* head */}
                         <thead className='rounded-2xl'>
-                        <tr className=''>
+                        <tr className='border- border-green-500'>
                             <th className='border w-8/12'><div className='flex items-center gap-1'><CgSmile className='text-xl text-green-700'/><span className='text-[#475467] text-[14px] inter'>Approval and Publish Time</span></div></th>
-                            <th className='border text-[14px] inter font-semibold text-[#000000]'>Instant</th>
+                            <th className='border dark:text-white text-[14px] inter font-semibold text-[#000000]'>Instant</th>
                         </tr>
                         </thead>
                         <tbody>
                         {/* row 1 */}
                         <tr>
                             <td className='border'><div className='flex gap-1 items-center'><IoCheckmark className='text-green-700 text-base'/><span className='text-[#475467] text-[14px] inter'>Promotion Duration</span></div></td>
-                            <td className='border text-[14px] inter font-semibold text-[#000000]'>1 Week</td>
+                            <td className='border text-[14px] pl-11 inter dark:text-white font-semibold text-[#000000]'>1 Week</td>
                         </tr>
                         <tr>
                             <td className='border'><div className='flex  gap-1 items-center'><IoCheckmark className='text-green-700 text-base'/><span className='text-[#475467] text-[14px] inter'>Chance to Get Featured on Homepage</span></div></td>
-                            <td className='border text-[14px] inter font-semibold text-[#000000]'>Hign</td>
+                            <td className='border text-[14px] inter pl-11 font-semibold dark:text-white text-[#000000]'>Hign</td>
                         </tr>
                         <tr>
                             <td className='border'><div className='flex items-center gap-1'><IoCheckmark className='text-green-700 text-base'/><span className='text-[#475467] text-[14px] inter'>Featured on Category Page</span></div></td>
-                            <td className='border text-[14px] inter font-semibold text-[#000000]'>Yes</td>
+                            <td className='border text-[14px] dark:text-white pl-11 inter font-semibold text-[#000000]'>Yes</td>
                         </tr>
                         </tbody>
                     </table>
@@ -53,7 +51,7 @@ const UserPayment = () => {
 
 
             <Elements stripe={stripePromise}>
-                <CheckoutForm></CheckoutForm>
+                <CheckoutForm/>
             </Elements>
         </div>
     );

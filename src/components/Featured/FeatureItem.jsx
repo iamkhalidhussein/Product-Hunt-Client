@@ -1,10 +1,11 @@
 import { MdArrowOutward } from "react-icons/md";
 import upvotee from '../../assets/upvote.png';
-import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosPublic from "../../hooks/useAxiosPublic.js";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import PropTypes from 'prop-types';
 
 const FeatureItem = ({product, handleRefetch}) => {
     // console.log(product);
@@ -18,7 +19,7 @@ const FeatureItem = ({product, handleRefetch}) => {
             return navigate('/login');
         }
         
-        axiosPublic.patch(`/userrs/${user.email}/${_id}`)
+        axiosPublic.patch(`/users/userrs/${user.email}/${_id}`)
         .then((res) => {
             console.log(res.data, _id);
             if(res.data === true) {
@@ -35,7 +36,7 @@ const FeatureItem = ({product, handleRefetch}) => {
         .catch(error => console.error('Error upvoting:', error));
     }
     return (
-        <div className="flex justify-center">
+        <div className="md:flex justify-center">
             <div className='border rounded-lg mr-3'>
                 <div className='p-5 pl-6'>
                     <img className='w-96 h-56 border rounded-md' src={image} alt="#" />
@@ -58,6 +59,19 @@ const FeatureItem = ({product, handleRefetch}) => {
             </div>
         </div>
     );
+};
+
+FeatureItem.propTypes = {
+    product: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        upvote: PropTypes.number,
+        visit_site: PropTypes.string.isRequired,
+    }).isRequired, 
+
+    handleRefetch: PropTypes.func.isRequired, 
 };
 
 export default FeatureItem;

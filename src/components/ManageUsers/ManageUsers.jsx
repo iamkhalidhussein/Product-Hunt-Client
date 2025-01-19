@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAxiosSecure from '../../hooks/useAxiosSecure.js';
 import Swal from 'sweetalert2';
 import { FaUser } from 'react-icons/fa6';
 import { MdAddModerator } from "react-icons/md";

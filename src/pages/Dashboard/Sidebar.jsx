@@ -28,13 +28,13 @@ const Sidebar = ({ activeRoute, isAdmin, isModerator, dashboardLogOut, user }) =
                     <Link
                         key={index}
                         to={link.path}
-                        className={`flex gap-2 mb-1 cursor-pointer py-3 rounded-md pl-4 pr-56 items-center hover:bg-[#686EF8] hover:text-white duration ${
+                        className={`flex gap-2 mb-1 cursor-pointer py-3 rounded-md pl-4 md:pr-56 items-center hover:bg-[#686EF8] hover:text-white duration ${
                             activeRoute === link.path ? 'bg-[#686EF8] text-white' : ''
                         }`}
                     >
                         
-                        <span className="text-white">{link.icon}</span>
-                        <span className="text-white">{link.label}</span>
+                        <span className="dark:text-white">{link.icon}</span>
+                        <span className="dark:text-white">{link.label}</span>
                     </Link>
                 )
             ))}

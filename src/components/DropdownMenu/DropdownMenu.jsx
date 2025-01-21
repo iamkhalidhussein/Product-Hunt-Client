@@ -13,8 +13,10 @@ import {
     AvatarImage,
   } from "@/components/ui/avatar"
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
 
 const DropdownMenuNavbar = () => {
     const { logOut } = useContext(AuthContext);
@@ -24,6 +26,19 @@ const DropdownMenuNavbar = () => {
         logOut();
         navigate('/');
     };
+
+    const [theme, setTheme] = useState(() => {
+      return localStorage.getItem("resourcefyi-theme") === "dark";
+  });
+
+  const handleThemeChange = () => {
+      setTheme(!theme);
+      localStorage.setItem("resourcefyi-theme", !theme ? "dark" : "light");
+  }
+
+  useEffect(() => {
+      document.documentElement.classList.toggle("dark", theme);
+  }, [theme]);
 
     return (
         <DropdownMenu>
@@ -41,6 +56,11 @@ const DropdownMenuNavbar = () => {
           <Link to="/dashboard"><DropdownMenuItem>Dashboard</DropdownMenuItem></Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={handleThemeChange} >
+          <Switch id="airplane-mode" checked={theme}/>
+          <Label htmlFor="airplane-mode">Dark Mode</Label>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout}>
           Log out

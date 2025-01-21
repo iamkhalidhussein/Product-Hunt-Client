@@ -9,8 +9,6 @@ import AddProductTxtEditor from './AddProductTxtEditor.jsx';
 import AddProductHeader from './AddProductHeader.jsx';
 import AddProductInputs from './AddProductInputs.jsx';
 
-
-
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
@@ -23,7 +21,7 @@ const AddProductPage = () => {
 
     const onDrop = useCallback((acceptedFiles) => {
         setImage(acceptedFiles)
-    }, [])
+    }, []);
 
     // console.log(files)
     const handleProductSubmit = async (e) => {
@@ -50,17 +48,17 @@ const AddProductPage = () => {
         })
         console.log(res.data)
         if(res.data.success) {
-            const random = Math.floor(Math.random() * 20 + 1);
             // console.log(typeof random)
             const userProduct = {
                 image: res.data.data.display_url,
                 title: product_data.product_title,
                 description: product_data.product_description,
-                upvote: random,
+                upvote: 0,
+                status: 'pending',
                 subtitle: product_data.product_subtitle,
                 visit_site: product_data.product_directLink,
                 creatorEmail: user.email
-            }
+            };
             axiosPublic.post(`/products/submitProduct`, userProduct)
             .then((res) => {
                 console.log(res.data);

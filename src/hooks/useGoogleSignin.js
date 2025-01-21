@@ -18,7 +18,7 @@ const useGoogleSignin = () => {
                 email: result.user?.email,
                 name: result.user?.displayName
             }
-            axiosPublic.post('/users/postUser', userInfo)
+            axiosPublic.post('/users/userprofileinfo', userInfo)
             .then((res) => {
                 console.log(res.data);
                 if(res.data) {

@@ -3,23 +3,30 @@ import useAxiosSecure from "../../hooks/useAxiosSecure.js";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Pencil, Trash2 } from 'lucide-react'
+
 
 const MyProducts = () => {
     const axiosSecure = useAxiosSecure();
     const {user} = useContext(AuthContext);
 
-    const {data: userProducts = [], refetch} = useQuery({
-        queryKey: ['users'],
+    const {data: userProducts = [], isLoading, refetch} = useQuery({
+        queryKey: ['userProducts', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/products/getSubmittedProduct/${user.email}`, {
-            });
+            const res = await axiosSecure.get(`/products/getSubmittedProduct/${user?.email}`);
             return res.data;
-        }
+        },
+        enabled: !!user?.email
     });
-    console.log(userProducts)
+    console.log('my products',userProducts)
     useEffect(() => {
         refetch(); 
-    }, [])
+    }, [user?.email, refetch])
+
+    console.log(isLoading)
 
     const handleProductDelete = (productId) => {
         console.log('handleProductDelete', productId);
@@ -61,38 +68,60 @@ const MyProducts = () => {
         });
 
     }
+
     return (
-        <div className="mt-12">
-            <h3 className="text-[#1B2530] text-[35px] font-medium">My Products</h3>
-            <div className="overflow-x-auto">
-            <table className="table">
-                {/* head */}
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Product Name</th>
-                    <th>Votes</th>
-                    <th>Status</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    userProducts.map((product,idx) => 
-                    <tr key={product._id}>
-                        <th>{idx+1}</th>
-                        <td>{product.title}</td>
-                        <td>{product.upvote}</td>
-                        <td>{product.pending_status ? 'Accepted' : 'Pending'}</td>
-                        <td><button className="bg-blue-500 text-white py-[8px] rounded-md px-3">Update</button></td>
-                        <td onClick={() => handleProductDelete(product._id)}><button className="bg-red-500 text-white py-[8px] rounded-md px-3">Delete</button></td>
-                    </tr>)
-                }
-                </tbody>
-            </table>
-        </div>
-        </div>
+        <div className="container mx-auto py-14">
+        <Table>
+          <TableHeader className="bg-gray-100">
+            <TableRow>
+              <TableHead className="font-semibold">Product Name</TableHead>
+              <TableHead className="font-semibold">Votes</TableHead>
+              <TableHead className="font-semibold">Status</TableHead>
+              <TableHead className="font-semibold">Update</TableHead>
+              <TableHead className="font-semibold">Delete</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {userProducts.map((product) => (
+              <TableRow key={product._id}>
+                <TableCell className="font-medium">{product.title}</TableCell>
+                <TableCell>{product.upvote}</TableCell>
+                <TableCell>
+                  <Badge 
+                    className={
+                      `${product.status === 'approved' && 'bg-green-500'}`
+                    }
+                    variant={
+                      product.status === "pending"
+                        && "default"
+                    }
+                  >
+                    {product.status}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => {}}
+                  >
+                    <Pencil className="h-4 w-4" />
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => handleProductDelete(product._id)}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+    </div>
     );
 };
 

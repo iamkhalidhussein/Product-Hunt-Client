@@ -1,129 +1,189 @@
-// import { lazy } from "react";
-// const Dashboard = lazy(() => import('../pages/Dashboard/Dashboard'));
-import {
-    createBrowserRouter,
-    } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { createBrowserRouter } from "react-router-dom";
 import Main from '../Layout/Main';
 import Home from '../pages/Home/Home';
 import SignUp from "../pages/SignUp/SignUp";
 import Login from "../pages/Login/Login";
-import Dashboard from '../pages/Dashboard/Dashboard';
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import DashboardErrorPage from '../components/DashboardErrorPage/DashboardErrorPage';
-import Profile from '../components/Profile/Profile';
-import Bookmarks from '../components/Bookmarks/Bookmarks';
-import Upvotes from '../components/Upvotes/Upvotes';
-import Submissions from '../components/Submissions/Sumissions';
-import Settings from '../components/Settings/Settings';
-import ManageUsers from "../components/ManageUsers/ManageUsers";
-import AdminHome from '../components/AdminHome/AdminHome';
-import UserProfile from '../components/UserProfile/UserProfile';
-import UserPayment from '../pages/UserPayment/UserPayment';
-import AddProductPage from '../components/AddProductPage/AddProductPage';
-import MyProducts from '../components/UserMyProducts/MyProducts'
-import UserAccountSetting from "../components/UserAccountSetting/UserAccountSetting";
-import ProductReview from '../components/ProductReview/ProductReview';
-import ReportedContent from '../components/ReportedContent/ReportedContent';
 import PaymentSuccess from '../components/UserPaymentSuccess/PaymentSuccess';
 import PaymentFailed from '../components/UserPaymentFailed/PaymentFailed';
 import PaymentCancel from '../components/UserPaymentCancel/PaymentCancel';
 
+// Lazy load components
+const Dashboard = lazy(() => import('../pages/Dashboard/Dashboard'));
+const Profile = lazy(() => import('../components/Profile/Profile'));
+const Bookmarks = lazy(() => import('../components/Bookmarks/Bookmarks'));
+const Upvotes = lazy(() => import('../components/Upvotes/Upvotes'));
+const Submissions = lazy(() => import('../components/Submissions/Submissions'));
+const Settings = lazy(() => import('../components/Settings/Settings'));
+const ManageUsers = lazy(() => import("../components/ManageUsers/ManageUsers"));
+const AdminHome = lazy(() => import('../components/AdminHome/AdminHome'));
+const UserProfile = lazy(() => import('../components/UserProfile/UserProfile'));
+const UserPayment = lazy(() => import('../pages/UserPayment/UserPayment'));
+const AddProductPage = lazy(() => import('../components/AddProductPage/AddProductPage'));
+const MyProducts = lazy(() => import('../components/UserMyProducts/MyProducts'));
+const UserAccountSetting = lazy(() => import("../components/UserAccountSetting/UserAccountSetting"));
+const ProductReview = lazy(() => import('../components/ProductReview/ProductReview'));
+const ReportedContent = lazy(() => import('../components/ReportedContent/ReportedContent'));
 
 export const router = createBrowserRouter([
-        {
-        path: "/",
-        element: <Main></Main>,
-        errorElement: <ErrorPage></ErrorPage>,
-        children: [
-            {
-                path: '/',
-                element: <Home></Home>
-            }, 
-            {
-                path: '/signup',
-                element: <SignUp></SignUp>
-            },
-            {
-                path: '/login',
-                element: <Login></Login>
-            },
-            //ssl commerz payment related routes and components
-            {   
-                path: 'payment/success',
-                element: <PaymentSuccess></PaymentSuccess>
-            },
-            {   
-                path: 'payment/failed',
-                element: <PaymentFailed></PaymentFailed>
-            },
-            {   
-                path: 'payment/cancel',
-                element: <PaymentCancel></PaymentCancel>
-            }
-        ]
-        },
-        {
-            path: '/dashboard',
-            element: <PrivateRoute><Dashboard/></PrivateRoute>,
-            errorElement: <DashboardErrorPage></DashboardErrorPage>,
-            children: [
-                {
-                    path: 'profile',
-                    element: <Profile></Profile>
-                },
-                {
-                    path: 'userProfile',
-                    element: <UserProfile></UserProfile>
-                },
-                {
-                    path: 'addProductPage',
-                    element: <AddProductPage></AddProductPage>
-                },
-                {
-                    path: 'userMyProducts',
-                    element: <MyProducts></MyProducts>
-                },
-                {
-                    path: 'userPayment',
-                    element: <UserPayment></UserPayment>
-                },
-                {
-                    path: 'userAccountSetting',
-                    element: <UserAccountSetting></UserAccountSetting>
-                },
-                {
-                    path: 'productReviewPage',
-                    element: <ProductReview></ProductReview>
-                },
-                {
-                    path: 'reportedContentPage',
-                    element: <ReportedContent></ReportedContent>
-                },
-                {
-                    path: 'bookmarks',
-                    element: <Bookmarks></Bookmarks>
-                },
-                {
-                    path: 'upvotes',
-                    element: <Upvotes></Upvotes>
-                },
-                {
-                    path: 'submissions',
-                    element: <Submissions></Submissions>
-                },
-                {
-                    path: 'settings',
-                    element: <Settings></Settings>
-                },
-                {
-                    path: 'adminManageUser',
-                    element: <ManageUsers></ManageUsers>
-                },
-                {
-                    path: 'adminHome',
-                    element: <AdminHome></AdminHome>
-                },
-            ]
-        },
-    ]);
+  {
+    path: "/",
+    element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: '/',
+        element: <Home></Home>
+      },
+      {
+        path: '/signup',
+        element: <SignUp></SignUp>
+      },
+      {
+        path: '/login',
+        element: <Login></Login>
+      },
+      // SSL Commerz payment-related routes
+      {
+        path: 'payment/success',
+        element: <PaymentSuccess></PaymentSuccess>
+      },
+      {
+        path: 'payment/failed',
+        element: <PaymentFailed></PaymentFailed>
+      },
+      {
+        path: 'payment/cancel',
+        element: <PaymentCancel></PaymentCancel>
+      }
+    ]
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <PrivateRoute>
+        <Suspense fallback={<div>Loading Dashboard...</div>}>
+          <Dashboard />
+        </Suspense>
+      </PrivateRoute>
+    ),
+    errorElement: <DashboardErrorPage></DashboardErrorPage>,
+    children: [
+      {
+        path: 'profile',
+        element: (
+          <Suspense fallback={<div>Loading Profile...</div>}>
+            <Profile />
+          </Suspense>
+        )
+      },
+      {
+        path: 'userProfile',
+        element: (
+          <Suspense fallback={<div>Loading User Profile...</div>}>
+            <UserProfile />
+          </Suspense>
+        )
+      },
+      {
+        path: 'addProductPage',
+        element: (
+          <Suspense fallback={<div>Loading Add Product Page...</div>}>
+            <AddProductPage />
+          </Suspense>
+        )
+      },
+      {
+        path: 'userMyProducts',
+        element: (
+          <Suspense fallback={<div>Loading My Products...</div>}>
+            <MyProducts />
+          </Suspense>
+        )
+      },
+      {
+        path: 'userPayment',
+        element: (
+          <Suspense fallback={<div>Loading User Payment...</div>}>
+            <UserPayment />
+          </Suspense>
+        )
+      },
+      {
+        path: 'userAccountSetting',
+        element: (
+          <Suspense fallback={<div>Loading User Account Setting...</div>}>
+            <UserAccountSetting />
+          </Suspense>
+        )
+      },
+      {
+        path: 'productReviewPage',
+        element: (
+          <Suspense fallback={<div>Loading Product Review...</div>}>
+            <ProductReview />
+          </Suspense>
+        )
+      },
+      {
+        path: 'reportedContentPage',
+        element: (
+          <Suspense fallback={<div>Loading Reported Content...</div>}>
+            <ReportedContent />
+          </Suspense>
+        )
+      },
+      {
+        path: 'bookmarks',
+        element: (
+          <Suspense fallback={<div>Loading Bookmarks...</div>}>
+            <Bookmarks />
+          </Suspense>
+        )
+      },
+      {
+        path: 'upvotes',
+        element: (
+          <Suspense fallback={<div>Loading Upvotes...</div>}>
+            <Upvotes />
+          </Suspense>
+        )
+      },
+      {
+        path: 'submissions',
+        element: (
+          <Suspense fallback={<div>Loading Submissions...</div>}>
+            <Submissions />
+          </Suspense>
+        )
+      },
+      {
+        path: 'settings',
+        element: (
+          <Suspense fallback={<div>Loading Settings...</div>}>
+            <Settings />
+          </Suspense>
+        )
+      },
+      {
+        path: 'adminManageUser',
+        element: (
+          <Suspense fallback={<div>Loading Manage Users...</div>}>
+            <ManageUsers />
+          </Suspense>
+        )
+      },
+      {
+        path: 'adminHome',
+        element: (
+          <Suspense fallback={<div>Loading Admin Home...</div>}>
+            <AdminHome />
+          </Suspense>
+        )
+      }
+    ]
+  }
+]);

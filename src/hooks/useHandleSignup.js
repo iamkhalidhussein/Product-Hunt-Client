@@ -43,7 +43,7 @@ const useHandleSignup = (imageURL, setLoading) => {
                     name: data.name,
                     email: data.email,
                 }
-                axiosPublic.post('/users/postUser', userInfo)
+                axiosPublic.post('/users/userprofileinfo', userInfo)
                 .then((res) => {
                     console.log('response', res);
                     if(res.data.insertedId) {

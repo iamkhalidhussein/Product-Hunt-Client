@@ -28,12 +28,12 @@ const useHandleSignup = (imageURL, setLoading) => {
         
         setLoading(true)
         const data = {name, email, photoURL, password};
-        console.log(data);
+        // console.log(data);
         
         //create new user
         createUser(data.email, data.password)
-        .then((result) => {
-            console.log(result.user)
+        .then(() => {
+            // console.log(result.user)
     
             //update user profile
             updateUserProfile(data.name, data.photoURL)

@@ -10,6 +10,7 @@ import DashboardErrorPage from '../components/DashboardErrorPage/DashboardErrorP
 import PaymentSuccess from '../components/UserPaymentSuccess/PaymentSuccess';
 import PaymentFailed from '../components/UserPaymentFailed/PaymentFailed';
 import PaymentCancel from '../components/UserPaymentCancel/PaymentCancel';
+import DefaultLazySkeleton from '../components/Skeletons/DefaultLazySkeleton';
 
 // Lazy load components
 const Dashboard = lazy(() => import('../pages/Dashboard/Dashboard'));
@@ -75,7 +76,7 @@ export const router = createBrowserRouter([
       {
         path: 'profile',
         element: (
-          <Suspense fallback={<div>Loading Profile...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <Profile />
           </Suspense>
         )
@@ -83,7 +84,7 @@ export const router = createBrowserRouter([
       {
         path: 'userProfile',
         element: (
-          <Suspense fallback={<div>Loading User Profile...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <UserProfile />
           </Suspense>
         )
@@ -91,7 +92,7 @@ export const router = createBrowserRouter([
       {
         path: 'addProductPage',
         element: (
-          <Suspense fallback={<div>Loading Add Product Page...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <AddProductPage />
           </Suspense>
         )
@@ -99,7 +100,7 @@ export const router = createBrowserRouter([
       {
         path: 'userMyProducts',
         element: (
-          <Suspense fallback={<div>Loading My Products...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <MyProducts />
           </Suspense>
         )
@@ -107,7 +108,7 @@ export const router = createBrowserRouter([
       {
         path: 'userPayment',
         element: (
-          <Suspense fallback={<div>Loading User Payment...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <UserPayment />
           </Suspense>
         )
@@ -115,7 +116,7 @@ export const router = createBrowserRouter([
       {
         path: 'userAccountSetting',
         element: (
-          <Suspense fallback={<div>Loading User Account Setting...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <UserAccountSetting />
           </Suspense>
         )
@@ -123,7 +124,7 @@ export const router = createBrowserRouter([
       {
         path: 'productReviewPage',
         element: (
-          <Suspense fallback={<div>Loading Product Review...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <ProductReview />
           </Suspense>
         )
@@ -131,7 +132,7 @@ export const router = createBrowserRouter([
       {
         path: 'reportedContentPage',
         element: (
-          <Suspense fallback={<div>Loading Reported Content...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <ReportedContent />
           </Suspense>
         )
@@ -139,7 +140,7 @@ export const router = createBrowserRouter([
       {
         path: 'bookmarks',
         element: (
-          <Suspense fallback={<div>Loading Bookmarks...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <Bookmarks />
           </Suspense>
         )
@@ -147,7 +148,7 @@ export const router = createBrowserRouter([
       {
         path: 'upvotes',
         element: (
-          <Suspense fallback={<div>Loading Upvotes...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <Upvotes />
           </Suspense>
         )
@@ -155,7 +156,7 @@ export const router = createBrowserRouter([
       {
         path: 'submissions',
         element: (
-          <Suspense fallback={<div>Loading Submissions...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <Submissions />
           </Suspense>
         )
@@ -163,7 +164,7 @@ export const router = createBrowserRouter([
       {
         path: 'settings',
         element: (
-          <Suspense fallback={<div>Loading Settings...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <Settings />
           </Suspense>
         )
@@ -171,7 +172,7 @@ export const router = createBrowserRouter([
       {
         path: 'adminManageUser',
         element: (
-          <Suspense fallback={<div>Loading Manage Users...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <ManageUsers />
           </Suspense>
         )
@@ -179,7 +180,7 @@ export const router = createBrowserRouter([
       {
         path: 'adminHome',
         element: (
-          <Suspense fallback={<div>Loading Admin Home...</div>}>
+          <Suspense fallback={<DefaultLazySkeleton/>}>
             <AdminHome />
           </Suspense>
         )

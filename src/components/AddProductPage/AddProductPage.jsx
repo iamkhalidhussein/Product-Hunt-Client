@@ -37,16 +37,16 @@ const AddProductPage = () => {
         const withoutSpanTags = withoutPTags.replace(/<span.*?>/g, '').replace(/<\/span>/g, '');
         const product_description = withoutSpanTags;
         const product_data = {product_title, product_category, product_subtitle, product_directLink, product_description, image}
-        console.log(product_data)
+        // console.log(product_data)
 
-        console.log(product_description)
+        // console.log(product_description)
         const imageFile = {image: product_data.image[0]};
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         })
-        console.log(res.data)
+        // console.log(res.data)
         if(res.data.success) {
             // console.log(typeof random)
             const userProduct = {
@@ -61,7 +61,7 @@ const AddProductPage = () => {
             };
             axiosPublic.post(`/products/submitProduct`, userProduct)
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 if(res.data.insertedId) {
                     Swal.fire({
                         icon: "success",

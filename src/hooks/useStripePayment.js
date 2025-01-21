@@ -16,7 +16,7 @@ const useStripePayment = (stripe ,setError, setTransactionId, elements, CardElem
         setLoading(true);
         axiosPublic.get(`/users/paymentinfo/${user.email}`)
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (!res.data.email) {
                     if (!stripe || !elements) {
                         return;

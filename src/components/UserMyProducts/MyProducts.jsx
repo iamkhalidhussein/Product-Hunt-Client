@@ -21,15 +21,15 @@ const MyProducts = () => {
         },
         enabled: !!user?.email
     });
-    console.log('my products',userProducts)
+    // console.log('my products',userProducts)
     useEffect(() => {
         refetch(); 
     }, [user?.email, refetch])
 
-    console.log(isLoading)
+    // console.log(isLoading)
 
     const handleProductDelete = (productId) => {
-        console.log('handleProductDelete', productId);
+        // console.log('handleProductDelete', productId);
 
         Swal.fire({
             title: "Are you sure?",
@@ -43,7 +43,7 @@ const MyProducts = () => {
             if (result.isConfirmed) {
                 axiosSecure.delete(`/products/deleteUserProduct/${productId}`)
                 .then((res) => {
-                    console.log('Product deleted successfully', res.data);
+                    // console.log('Product deleted successfully', res.data);
                     if(res.data.deletedCount > 0) {
                         refetch();
                         Swal.fire({
@@ -56,7 +56,7 @@ const MyProducts = () => {
                     }
                 })
                 .catch((error) => {
-                    console.log('Error deleting product', error?.message);
+                    // console.log('Error deleting product', error?.message);
                     Swal.fire({
                         icon:'error',
                         title: 'Error Occured while deleting product',

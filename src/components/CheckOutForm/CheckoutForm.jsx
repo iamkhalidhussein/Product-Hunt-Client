@@ -16,10 +16,10 @@ const CheckoutForm = () => {
     useEffect(() => {
         axiosSecure.post('/payments/create-payment-intent', {price: totalPrice})
         .then((res) => {
-            console.log(res.data.clientSecret);
+            // console.log(res.data.clientSecret);
             setClientSecret(res.data.clientSecret)
         })
-        console.log(totalPrice)
+        // console.log(totalPrice)
     }, [axiosSecure, totalPrice])
 
     const handleSubmit = useStripePayment(stripe, setError, setTransactionId, elements, CardElement, clientSecret, totalPrice, setLoading);

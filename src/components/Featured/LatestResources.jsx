@@ -22,7 +22,7 @@ const LatestResources = ({product, handleRefetch}) => {
         }
         axiosPublic.patch(`/users/${user.email}/${_id}`)
         .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.modifiedCount > 0) {
                 handleRefetch()
             }

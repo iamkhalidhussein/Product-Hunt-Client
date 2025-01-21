@@ -21,7 +21,7 @@ const FeatureItem = ({product, handleRefetch}) => {
         
         axiosPublic.patch(`/users/userrs/${user.email}/${_id}`)
         .then((res) => {
-            console.log(res.data, _id);
+            // console.log(res.data, _id);
             if(res.data === true) {
                 Swal.fire({
                     title: "Reminder",

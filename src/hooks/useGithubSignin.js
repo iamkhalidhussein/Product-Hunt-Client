@@ -11,7 +11,7 @@ const useGithubSignin = () => {
     const signInWithGithub = () => {
         githubSignIn() 
         .then((result) => {
-            console.log(result);
+            // console.log(result);
             if(result.user) {
                 Swal.fire({
                     icon: "success",

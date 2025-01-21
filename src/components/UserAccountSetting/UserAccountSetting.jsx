@@ -29,10 +29,10 @@ const UserAccountSetting = () => {
     };
 
     
-    console.log('user', user);
+    // console.log('user', user);
     const handleProfileUpdate = async (e) => {
         e.preventDefault();
-        console.log(selectedFile);
+        // console.log(selectedFile);
         setUpdatingProfile(true);
         const imageFile = {image: selectedFile};
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
@@ -40,11 +40,11 @@ const UserAccountSetting = () => {
                 'content-type': 'multipart/form-data'
             }
         })
-        console.log(res.data);
+        // console.log(res.data);
         const imageUrl = res.data.data.display_url;
         const updateRes = await updateUserProfilePic(imageUrl);
         setUpdatingProfile(false);
-        console.log(updateRes)
+        // console.log(updateRes)
     };
 
     const handleUserInfoUpdate = async (e) => {
@@ -63,14 +63,14 @@ const UserAccountSetting = () => {
         if (website_url) newData.website_url = website_url;
 
         const updateRes = await axiosSecure.patch(`/users/updateuserprofileinfo/${user?.email}`, newData);
-        console.log(updateRes);
+        // console.log(updateRes);
 
     };
 
     useEffect(() => {
         const fetchUserProfile = async () => {
             const fetchedData = await axiosSecure.get(`/users/userprofileinfo/${user?.email}`);
-            console.log(fetchedData)
+            // console.log(fetchedData)
             setUserProfileInfo(fetchedData?.data);
         };
         fetchUserProfile();

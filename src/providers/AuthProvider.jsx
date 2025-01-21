@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
             photoURL: photoURL
         })
         .then((result) => {
-            console.log("User profile updated successfully:", result);
+            // console.log("User profile updated successfully:", result);
             return result;
         })
         .catch((error) => {

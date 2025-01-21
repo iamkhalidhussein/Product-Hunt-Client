@@ -12,7 +12,7 @@ const useSSLCommerzPayment = () => {
             currenccy: 'BDT'
         })
         .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             const reDirectUrl = res.data.paymentUrl;
             if(reDirectUrl) {
                 window.location.replace(reDirectUrl);

@@ -4,8 +4,8 @@ import { useState } from "react";
 const UpdateProfileDetails = ({ handleUserInfoUpdate, user }) => {
     const [onChange, setOnChange] = useState(false);
     
-    console.log(user)
-    console.log(onChange);
+    // console.log(user)
+    // console.log(onChange);
     return (
         <div className="border md:w-1/2 md:mt-0 mt-3 bg-white py-12 px-10">
             <form onSubmit={handleUserInfoUpdate}>

@@ -15,7 +15,7 @@ const ProductReview = () => {
             return res.data;
         }
     });
-    console.log(userProductss)
+    // console.log(userProductss)
     return (
         <div className="mt-12">
             <h3 className="text-[#1B2530] text-[35px] font-medium">My Products</h3>

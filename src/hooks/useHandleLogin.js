@@ -23,11 +23,11 @@ const useHandleLogin = (setLoading) => {
             return;
         }
         
-        console.log(email, password);
+        // console.log(email, password);
         setLoading(true);
         signIn(email, password)
         .then((result) => {
-            console.log(result.user);
+            // console.log(result.user);
             if(result.user) {
                 Swal.fire({
                     title: "Login Successfull",

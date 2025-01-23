@@ -12,7 +12,7 @@ const UserProfile = () => {
     const [isSubscribe, setIsSubscribe] = useState(false);
 
     useEffect(() => {
-    axiosPublic.get(`/users/paymentinfo/${user?.email}`)
+    axiosPublic.get(`/users/paymentinfo/${user?.email || user.providerData[0]?.email}`)
     .then((res) => {
         // console.log(res.data)
         if(res.data.email) {
@@ -41,6 +41,7 @@ const UserProfile = () => {
 export default UserProfile;
 
 const UserInfo = ({ user }) => {
+
     return (
     <div className="md:flex gap-3 items-end">
       <img
@@ -55,7 +56,7 @@ const UserInfo = ({ user }) => {
         <div className="flex items-center text-white bg-[#686EF8] justify-center rounded-3xl py-1 px-3">
           <MdOutlineMarkEmailUnread className="text-xl mr-1" />
           <span className="mr-1">Email:</span>
-          {user?.email}
+          {user?.email || user?.providerData[0]?.email}
         </div>
       </div>
     </div>

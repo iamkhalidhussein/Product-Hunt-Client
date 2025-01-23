@@ -1,52 +1,32 @@
 import { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../hooks/useAxiosPublic.js";
+import { AuthContext } from "../../providers/AuthProvider";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import ProductReviewTable from "./ProductReviewTable";
 
 const ProductReview = () => {
-    const axiosPublic = useAxiosPublic();
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
 
-    const {data: userProductss = [], refetch} = useQuery({
-        queryKey: ['userss'],
+    const { data: userProducts = [], isLoading, isError, } = useQuery({
+        queryKey: ["userProducts", user?.email],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/users/getSubmittedProduct/${user.email}`, {
-            });
-            return res.data;
-        }
+            if (!user?.email) return [];
+            const response = await axiosSecure.get(`/products/getallsubmittedproducts/${user.email}`);
+            return response.data;
+        },
+        enabled: !!user?.email,
     });
-    // console.log(userProductss)
+
+    console.log(userProducts);
+
+    if (isError) {
+        return <div>Error fetching products. Please try again later.</div>;
+    }
+
     return (
         <div className="mt-12">
-            <h3 className="text-[#1B2530] text-[35px] font-medium">My Products</h3>
-            <div className="overflow-x-auto">
-            <table className="table">
-                {/* head */}
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Product Name</th>
-                    <th>Votes</th>
-                    <th>Status</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    userProductss.map((product,idx) => 
-                    <tr key={product._id}>
-                        <th>{idx+1}</th>
-                        <td>{product.title}</td>
-                        <td>{product.upvote}</td>
-                        <td>{product.pending_status ? 'Accepted' : 'Pending'}</td>
-                        <td>Update</td>
-                        <td>Delete</td>
-                    </tr>)
-                }
-                </tbody>
-            </table>
-        </div>
+            <ProductReviewTable products={userProducts} loading={isLoading}/>
         </div>
     );
 };

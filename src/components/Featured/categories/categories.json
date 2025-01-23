@@ -1,29 +1,110 @@
 [
-    { "icon": "ai", "label": "AI (Artificial Intelligence)" },
-    { "icon": "api", "label": "API" },
-    { "icon": "extension", "label": "Chrome Extensions" },
-    { "icon": "cloudStorage", "label": "Cloud Storage" },
-    { "icon": "gradients", "label": "Colors And Gradients" },
-    { "icon": "inspiration", "label": "Design Inspirations" },
-    { "icon": "designResource", "label": "Design Resources" },
-    { "icon": "designTools", "label": "Design Tools" },
-    { "icon": "developerTools", "label": "Developer Tools" },
-    { "icon": "Fonts", "label": "Fonts" },
-    { "icon": "Hosting", "label": "Hosting" },
-    { "icon": "icons", "label": "Icons" },
-    { "icon": "illustrations", "label": "Illustrations" },
-    { "icon": "logos", "label": "Logos" },
-    { "icon": "marketing", "label": "Marketing" },
-    { "icon": "newsletter", "label": "Newsletters" },
-    { "icon": "noCode", "label": "No-Code" },
-    { "icon": "openSource", "label": "Open Source" },
-    { "icon": "paymentGatways", "label": "Payment Gateways" },
-    { "icon": "productivity", "label": "Productivity" },
-    { "icon": "serverless", "label": "Serverless" },
-    { "icon": "skillDevelopment", "label": "Skill Development" },
-    { "icon": "stockPhotos", "label": "Stock Photos" },
-    { "icon": "uiLibraries", "label": "UI Libraries" },
-    { "icon": "webDev", "label": "UI Web Development" },
-    { "icon": "webTemplate", "label": "Web Templates" },
-    { "icon": "web3", "label": "Web3" }
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443501/AI_vngm4n.png", 
+        "label": "AI (Artificial Intelligence)" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443501/api_rzympd.png", 
+        "label": "API" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443501/chrome-extension_vdxg9f.png", 
+        "label": "Chrome Extensions" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443502/cloud-storage_yoxxvu.png", 
+        "label": "Cloud Storage" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443501/colors_cuk84v.png", 
+        "label": "Colors And Gradients"
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443502/design-inspiration_jnluew.png", 
+        "label": "Design Inspirations" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443502/design-resources_csx0ev.png", 
+        "label": "Design Resources" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443502/design-tools_hblmtn.png", 
+        "label": "Design Tools" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443503/developer-tools_j29a0b.png", 
+        "label": "Developer Tools" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443503/fonts_rv6hou.png", 
+        "label": "Fonts" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443503/hosting_c8esgx.png", 
+        "label": "Hosting" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443504/icons_cdrvjr.png", 
+        "label": "Icons" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443504/illustrations_w8nwhl.png", 
+        "label": "Illustrations" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443504/logos_ghk9vp.png", 
+        "label": "Logos" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443506/marketing_tv7t7p.png", 
+        "label": "Marketing" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443506/newsletter_rd41kn.png", 
+        "label": "Newsletters" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443506/no-code_z3cwfu.png", 
+        "label": "No-Code" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443506/open-source_g3cp4v.png", 
+        "label": "Open Source" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443507/payment_d8kkd1.png", 
+        "label": "Payment Gateways" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443508/productivity_mzuqz7.png", 
+        "label": "Productivity" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443508/serverless_fxvqem.png", 
+        "label": "Serverless" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443509/skill-development_o8ydem.png", 
+        "label": "Skill Development" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443509/stock-photos_vtybqm.png", 
+        "label": "Stock Photos" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443510/ui-libraries_ohns6f.png", 
+        "label": "UI Libraries" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443512/web-development_stucok.png", 
+        "label": "UI Web Development"
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443512/web-templates_org0f5.png", 
+        "label": "Web Templates" 
+    },
+    { 
+        "icon": "https://res.cloudinary.com/dksiicemx/image/upload/v1737443511/web3_ewm1it.png", 
+        "label": "Web3" 
+    }
 ]

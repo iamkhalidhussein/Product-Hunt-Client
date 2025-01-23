@@ -6,7 +6,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 
 const Bookmarks = () => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     return (
         <div>
             <div className='flex mt-14 border items-start justify-between pl-5 pr-5 rounded-lg py-10 bg-white'>

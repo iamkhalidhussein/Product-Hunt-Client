@@ -8,6 +8,7 @@ import useGoogleSignin from "../../hooks/useGoogleSignin.js";
 import useGithubSignin from "../../hooks/useGithubSignin.js";
 import InputFile from "../../components/InputFile/InputFile";
 import PropTypes from 'prop-types';
+import { Loader2 } from 'lucide-react';
 
 const SignUp = () => {
     const [imageURL, setImageURL] = useState(null);
@@ -62,7 +63,7 @@ const SignUp = () => {
                             className="border py-3 w-full hover:text-black rounded-md mb-4 text-white cursor-pointer bg-[#686EF8] hover:bg-blue-50 duration-200"
                             disabled={!imageURL || loading}
                         >
-                            {loading ? "Signing Up..." : "Sign Up"}
+                            {loading ? <Loader2 className="animate-spin mx-auto"/> : "Sign Up"}
                         </button>
                     </form>
 

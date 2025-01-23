@@ -13,7 +13,7 @@ const MyProducts = () => {
     const axiosSecure = useAxiosSecure();
     const {user} = useContext(AuthContext);
 
-    const {data: userProducts = [], isLoading, refetch} = useQuery({
+    const {data: userProducts = [], refetch} = useQuery({
         queryKey: ['userProducts', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/products/getSubmittedProduct/${user?.email}`);

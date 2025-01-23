@@ -9,7 +9,7 @@ import { Switch } from "@/components/ui/switch";
 import DropdownMenu from '@/components/DropdownMenu/DropdownMenu';
 
 const Navbar = () => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     const [theme, setTheme] = useState(() => {
         return localStorage.getItem("resourcefyi-theme") === "dark";
@@ -25,7 +25,6 @@ const Navbar = () => {
     }, [theme]);
 
     // console.log(theme);
-    // console.log(user);
 
     return (
         <div className="flex justify-between fixed z-10 w-full px-3 md:px-10 dark:bg-black bg-[#F5F8F9] py-6 border ">

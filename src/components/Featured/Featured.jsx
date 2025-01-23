@@ -1,4 +1,3 @@
-import * as assets from './assets.js';
 import 'react-tooltip/dist/react-tooltip.css'
 import { useState } from 'react';
 import FeatureItem from './FeatureItem';
@@ -85,7 +84,7 @@ const Featured = () => {
             <div className='border md:z-0 md:sticky left-0 top-0 h-screen md:w-[650px] overflow-y-auto bg-white dark:bg-black text-[#1B2430] ml-10 mt-14 text-[18px] rounded-lg py-7 pl-10 pr-8'>
                 <h3 className="text-[#1B2430] dark:text-white text-2xl pb-7 font-medium">Categories</h3>
                 {categories.map((category, index) => (
-                    <CategoryItem key={index} icon={assets[category.icon]} label={category.label}/>
+                    <CategoryItem key={index} icon={category?.icon} label={category?.label}/>
                 ))}
             </div>
             <div className='mt-14 w-full'>

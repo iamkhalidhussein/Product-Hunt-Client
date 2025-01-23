@@ -1,13 +1,14 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, lazy } from 'react';
 import { useCallback } from 'react'
 import useAxiosPublic from "../../hooks/useAxiosPublic.js";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
-import AddProductButtons from "./AddProductButtons.jsx";
-import AddProductFileInput from './AddProductFileInput.jsx';
-import AddProductTxtEditor from './AddProductTxtEditor.jsx';
-import AddProductHeader from './AddProductHeader.jsx';
-import AddProductInputs from './AddProductInputs.jsx';
+
+const AddProductButtons = lazy(() => import("./AddProductButtons.jsx"));
+const AddProductFileInput = lazy(() => import('./AddProductFileInput.jsx'));
+const AddProductTxtEditor = lazy(() => import('./AddProductTxtEditor.jsx'));
+const AddProductHeader = lazy(() => import('./AddProductHeader.jsx'));
+const AddProductInputs = lazy(() => import('./AddProductInputs.jsx'));
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`

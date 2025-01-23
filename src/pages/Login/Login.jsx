@@ -6,6 +6,7 @@ import useHandleLogin from "../../hooks/useHandleLogin.js";
 import useGoogleSignin from "../../hooks/useGoogleSignin.js";
 import useGithubSignin from "../../hooks/useGithubSignin.js";
 import { FormInput, PasswordInput, SocialLoginButton } from "../SignUp/SignUp.jsx";
+import { Loader2 } from "lucide-react";
 
 
 const Login = () => {
@@ -56,7 +57,7 @@ const Login = () => {
                             className="border py-3 w-full hover:text-black rounded-md mb-4 text-white cursor-pointer bg-[#686EF8] hover:bg-blue-50 duration-200"
                             disabled={loading}
                         >
-                            {loading ? "Logging..." : "Login"}
+                            {loading ? <Loader2 className="animate-spin mx-auto"/> : "Login"}
                         </button>
                     </form>
 

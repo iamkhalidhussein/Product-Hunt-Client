@@ -22,7 +22,7 @@ const Sidebar = ({ activeRoute, isAdmin, isModerator, dashboardLogOut, user }) =
     ];
 
     return (
-        <div className='border md:z-0 md:sticky left-0 top-0 h-full overflow-y-auto bg-white dark:bg-gray-800 text-[#1B2430] mx-3 md:mx-0 md:ml-10 mt-14 text-[18px] rounded-lg py-7 pl-8 pr-8'>
+        <div className='border md:z-0 md:sticky left-0 top-0 md:w-2/5 h-full overflow-y-auto bg-white dark:bg-gray-800 text-[#1B2430] mx-3 md:mx-0 md:ml-10 mt-14 text-[18px] rounded-lg py-7 pl-8 pr-8'>
             {sidebarLinks.map((link, index) => (
                 link.visible && (
                     <Link

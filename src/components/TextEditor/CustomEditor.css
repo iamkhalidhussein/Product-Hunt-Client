@@ -1,9 +1,9 @@
 .custom-editor {
-    height: 400px; /* Set your desired height here */
-    min-height: 400px; /* Ensure minimum height */
+    height: 400px; 
+    min-height: 400px;
   }
   
-  .custom-editor .ck-editor__editable { /* Target CKEditor's editable area */
-    height: 100%; /* Set height to 100% of the editor container */
+  .custom-editor .ck-editor__editable { 
+    height: 100%;
   }
   

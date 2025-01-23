@@ -101,5 +101,5 @@ InputField.propTypes = {
 
 UpdateProfileDetails.propTypes = {
     handleUserInfoUpdate: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object
 };

@@ -7,6 +7,7 @@ import { FaRegCircleQuestion } from "react-icons/fa6";
 const Footer = () => {
     return (
         <div className="pt-36 bg-[#F5F8F9] dark:bg-gray-900">
+
             <div className="md:flex grid justify-evenly  border">
                 <div className="py-12 md:mx-0 mx-auto">
                     <h3 className="text-[#1B2530] dark:text-white text-2xl font-medium pb-3">Explore</h3>
@@ -32,10 +33,12 @@ const Footer = () => {
                 </div>
                 <div className="md:flex justify-around pt-8">
                     <p className="text-center">© Copyright 2024 All Rights Reserved | Resource.fyi</p>
-                    <div className="flex py-3 items-center justify-center gap-4"><FaXTwitter className="text-xl text-[#79808A]"/>
-                    <PiUserSound className="text-xl text-[#79808A]"/>
-                    <IoLogoDiscord className="text-xl text-[#79808A]"/>
-                    <FaRegCircleQuestion className="text-xl text-[#79808A]"/></div>
+                    <div className="flex py-3 items-center justify-center gap-4">
+                        <FaXTwitter className="text-xl text-[#79808A]"/>
+                        <PiUserSound className="text-xl text-[#79808A]"/>
+                        <IoLogoDiscord className="text-xl text-[#79808A]"/>
+                        <FaRegCircleQuestion className="text-xl text-[#79808A]"/>
+                    </div>
                     <ul className="text-base text-[#79808A] dark:text-white font-medium flex justify-center gap-3">
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms</a></li>
@@ -44,6 +47,7 @@ const Footer = () => {
                     </ul>
                 </div>
             </div>
+            
         </div>
     );
 };

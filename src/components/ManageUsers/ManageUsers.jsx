@@ -4,8 +4,6 @@ import Swal from 'sweetalert2';
 import { FaUser } from 'react-icons/fa6';
 import { MdAddModerator } from "react-icons/md";
 
-
-
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
 
@@ -85,7 +83,6 @@ const ManageUsers = () => {
 
             <div className="overflow-x-auto">
             <table className="table">
-                {/* head */}
                 <thead>
                 <tr>
                     <th></th>

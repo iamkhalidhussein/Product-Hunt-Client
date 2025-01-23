@@ -8,7 +8,7 @@ const ProductReview = () => {
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
 
-    const { data: userProducts = [], isLoading, isError, } = useQuery({
+    const { data: userProducts = [], isLoading, isError, refetch } = useQuery({
         queryKey: ["userProducts", user?.email],
         queryFn: async () => {
             if (!user?.email) return [];
@@ -26,7 +26,7 @@ const ProductReview = () => {
 
     return (
         <div className="mt-12">
-            <ProductReviewTable products={userProducts} loading={isLoading}/>
+            <ProductReviewTable products={userProducts} loading={isLoading} refetch={refetch}/>
         </div>
     );
 };

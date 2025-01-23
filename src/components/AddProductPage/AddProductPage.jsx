@@ -58,7 +58,7 @@ const AddProductPage = () => {
                 status: 'pending',
                 subtitle: product_data.product_subtitle,
                 visit_site: product_data.product_directLink,
-                creatorEmail: user.email
+                creatorEmail: user?.email || user.providerData[0]?.email
             };
             axiosPublic.post(`/products/submitProduct`, userProduct)
             .then((res) => {

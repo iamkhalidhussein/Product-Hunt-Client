@@ -48,7 +48,7 @@ const Login = () => {
                             label="Password"
                             name="password"
                             placeholder="Your Password"
-                            password={password}
+                            password={toString(password)}
                             passwordToogle={passwordToogle}
                             required
                         />

@@ -1,10 +1,9 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { Edit2, Trash2 } from "lucide-react"
 import PropTypes from 'prop-types';
 import TableRowSkeleton from "./components/TableRowSkeleton";
+import ActionAlert from "./components/ActionAlert";
 
-const ProductReviewTable = ({ products, loading }) => {
+const ProductReviewTable = ({ products, loading, refetch }) => {
     return (
         <Table className="container mx-auto py-10">
             <TableHeader>
@@ -12,6 +11,7 @@ const ProductReviewTable = ({ products, loading }) => {
                 <TableHead>Product Name</TableHead>
                 <TableHead>Votes</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead className="text-left">Email</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
             </TableRow>
             </TableHeader>
@@ -31,15 +31,9 @@ const ProductReviewTable = ({ products, loading }) => {
                     {product.status}
                     </span>
                 </TableCell>
+                <TableCell className="font-medium">{product.creatorEmail}</TableCell>
                 <TableCell className="text-right">
-                    <Button variant="ghost" size="icon" onClick={() => {}} className="mr-2">
-                    <Edit2 className="h-4 w-4" />
-                    <span className="sr-only">Update</span>
-                    </Button>
-                    <Button variant="ghost" size="icon" onClick={() => {}}>
-                    <Trash2 className="h-4 w-4" />
-                    <span className="sr-only">Delete</span>
-                    </Button>
+                <ActionAlert id={product._id} refetch={refetch}/>
                 </TableCell>
                 </TableRow>
             ))}
@@ -52,5 +46,6 @@ export default ProductReviewTable;
 
 ProductReviewTable.propTypes = {
     products: PropTypes.array,
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    refetch: PropTypes.func
 };

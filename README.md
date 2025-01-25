@@ -36,12 +36,12 @@ To run Resource FYI locally, follow these steps:
 
 3. **Install Dependencies**:
     ```bash
-    npm install
+    pnpm install
     ```
 
 4. **Start the Development Server**:
     ```bash
-    npm run dev
+    pnpm run dev
     ```
 
 5. **Open your browser** and go to `http://localhost:5173` to view the application.

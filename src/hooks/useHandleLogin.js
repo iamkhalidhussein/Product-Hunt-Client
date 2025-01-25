@@ -28,9 +28,8 @@ const useHandleLogin = (setLoading) => {
     
         try {
             // Sign in the user
-            const result = await signIn(email, password);
-            console.log("User logged in:", result.user);
-    
+            await signIn(email, password);
+                
             // Show success message
             Swal.fire({
                 title: "Login Successful",

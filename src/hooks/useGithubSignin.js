@@ -14,10 +14,10 @@ const useGithubSignin = () => {
     const signInWithGithub = async () => {
         try {
             const result = await githubSignIn();
-            console.log('result', result);
+            // console.log('result', result);
 
-            const token = await localStorage.setItem('access-token', result?.user?.accessToken);
-            console.log("Token:", token);
+            await localStorage.setItem('access-token', result?.user?.accessToken);
+            // console.log("Token:", token);
 
             // Prepare user information
             const userInfo = {
@@ -27,13 +27,12 @@ const useGithubSignin = () => {
             };
 
             // Save user information to the database
-            const response = await axiosSecure.post(`/users/userprofileinfo/${result.user?.providerData[0]?.email}`, userInfo, {
+            await axiosSecure.post(`/users/userprofileinfo/${result.user?.providerData[0]?.email}`, userInfo, {
                 headers: {
                     'firebase': 'true',
                     'Content-Type': 'application/json'
                 }
             });
-            console.log("User data saved:", response);
 
             if (result.user) {
                 await Swal.fire({

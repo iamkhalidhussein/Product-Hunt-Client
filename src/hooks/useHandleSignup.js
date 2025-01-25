@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "./useAxiosSecure";
 
 const useHandleSignup = (imageURL, setLoading) => {
-    const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
+    const { createUser, updateUserProfile, logOut, user } = useContext(AuthContext);
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
 
@@ -16,7 +16,7 @@ const useHandleSignup = (imageURL, setLoading) => {
         const email = form.email.value;
         const photoURL = imageURL;
         const password = form.password.value;
-    
+
         // Validate password format
         if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=]).{6,}$/.test(password)) {
             Swal.fire({
@@ -31,16 +31,14 @@ const useHandleSignup = (imageURL, setLoading) => {
     
         try {
             // Create user in Firebase
-            const userCredential = await createUser(email, password);
-            console.log("User created:", userCredential.user);
+            await createUser(email, password);
     
             // Update user profile in Firebase
             await updateUserProfile(name, photoURL);
-            console.log("User profile updated");
     
             // Create user entry in the database
             const userInfo = { name, email };
-            const dbResponse = await axiosSecure.post('/users/userprofileinfo', userInfo);
+            const dbResponse = await axiosSecure.post(`/users/userprofileinfo/${user?.email}`, userInfo);
     
             if (dbResponse.data.insertedId) {
                 Swal.fire({
@@ -53,7 +51,6 @@ const useHandleSignup = (imageURL, setLoading) => {
     
             // Log out the user
             await logOut();
-            console.log("User logged out");
     
             // Navigate to the login page
             navigate('/login');

@@ -52,6 +52,71 @@ To run Resource FYI locally, follow these steps:
 - **Submit**: Click on the 'Submit' button to add a new resource to the platform.
 - **Rate & Review**: Provide feedback on resources you've tried to help others.
 
+## User Roles and Access
+
+This application supports three types of user roles:
+
+### 1. **User**
+- **Access**: 
+  - Can view public content.
+  - Can interact with basic features (e.g., create products post, comment, like).
+  - Cannot access administrative or moderation tools.
+
+### 2. **Moderator**
+- **Access**:
+  - Has all the permissions of a **User**.
+  - Can moderate content (e.g., delete inappropriate posts, ban users).
+  - Cannot access sensitive admin settings (e.g., delete the entire database, manage other admins).
+
+### 3. **Admin**
+- **Access**:
+  - Has all the permissions of a **Moderator**.
+  - Can manage application settings (e.g., add/remove moderators, update system configurations).
+  - Can access and modify all data in the system.
+
+---
+
+## How to Assign Roles
+
+### For Local Development
+1. **Admin**:
+   - Use the following credentials to log in as an admin:
+     - Email: `admindev@gmail.com`
+     - Password: `Dev123@@`
+
+2. **Moderator**:
+   - Use the following credentials to log in as a moderator:
+     - Email: `moderatordev@gmail.com`
+     - Password: `Dev123@@`
+
+3. **User**:
+   - Register a new account or use the following credentials:
+     - Email: `developer@gmail.com`
+     - Password: `Dev123@@`
+
+### For Production
+- Admins can assign roles to users via the admin dashboard.
+- Moderators are assigned by admins.
+
+---
+
+## Role-Based Routing
+- **Users** are redirected to `/dashboard` after login.
+- **Moderators** are redirected to `/moderator-dashboard`.
+- **Admins** are redirected to `/admin-dashboard`.
+
+---
+
+## Permissions Table
+| **Feature**            | **User** | **Moderator** | **Admin** |
+|-------------------------|----------|---------------|-----------|
+| View Public Content     | ✅       | ✅            | ✅        |
+| Create Posts            | ✅       | ✅            | ✅        |
+| Delete Posts            | ✅       | ✅            | ✅        |
+| Ban Users               | ❌       | ✅            | ✅        |
+| Manage System Settings  | ❌       | ❌            | ✅        |
+| Assign Roles            | ❌       | ❌            | ✅        |
+
 ## Contributing
 
 We welcome contributions to enhance Resource FYI! If you'd like to contribute, please follow these guidelines:

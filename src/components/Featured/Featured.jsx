@@ -7,6 +7,7 @@ import useAxiosPublic from '../../hooks/useAxiosPublic.js';
 import CategoryItem from './CategoryItem.jsx';
 import categories from './categories/categories.json';
 import PropTypes from 'prop-types';
+import { ProductCardSkeleton } from './ProductCardSkeleton.jsx';
 
 const Featured = () => {
     const [showAll, setShowAll] = useState(false);
@@ -123,11 +124,28 @@ const FeaturedResourceHeader2 = () => {
 
 const FetchFeaturedProducts = ({showAll, featuredProducts, handleRefetch}) => {
     return (
-        <div className='grid md:grid-cols-2 grid-cols-1 pt-12 gap-5'>
-            {showAll 
-            ? featuredProducts.map(product => <FeatureItem key={product._id} product={product} handleRefetch={handleRefetch}></FeatureItem>)
-            : featuredProducts.slice(0, 2).map(product => <FeatureItem key={product._id} product={product} handleRefetch={handleRefetch}></FeatureItem>)
-            }
+        <div className="grid md:grid-cols-2 grid-cols-1 pt-12 gap-5">
+            {!featuredProducts || featuredProducts.length === 0 ? (                
+                Array.from({ length: showAll ? 6 : 2 }).map((_, index) => (
+                <ProductCardSkeleton key={index} />
+                ))
+            ) : (
+                showAll
+                ? featuredProducts.map((product) => (
+                    <FeatureItem
+                        key={product._id}
+                        product={product}
+                        handleRefetch={handleRefetch}
+                    />
+                    ))
+                : featuredProducts.slice(0, 2).map((product) => (
+                    <FeatureItem
+                        key={product._id}
+                        product={product}
+                        handleRefetch={handleRefetch}
+                    />
+                ))
+            )}
         </div>
     )
 }
@@ -135,8 +153,9 @@ const FetchFeaturedProducts = ({showAll, featuredProducts, handleRefetch}) => {
 const FetchLatestResources = ({ latestResources, handleRefetch }) => {
     return (
         <div className='grid md:grid-cols-2 grid-cols-1 gap-6 pt-14 pr-3'>
-            {
+            {latestResources.length > 0 ?
                 latestResources.map(product => <LatestResources key={product._id} product={product} handleRefetch={handleRefetch}></LatestResources>)
+                : <ProductCardSkeleton/>
             }
         </div>
     )

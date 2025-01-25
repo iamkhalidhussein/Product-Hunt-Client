@@ -152,11 +152,20 @@ const FetchFeaturedProducts = ({showAll, featuredProducts, handleRefetch}) => {
 
 const FetchLatestResources = ({ latestResources, handleRefetch }) => {
     return (
-        <div className='grid md:grid-cols-2 grid-cols-1 gap-6 pt-14 pr-3'>
-            {latestResources.length > 0 ?
-                latestResources.map(product => <LatestResources key={product._id} product={product} handleRefetch={handleRefetch}></LatestResources>)
-                : <ProductCardSkeleton/>
-            }
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-6 pt-14 pr-3">
+            {latestResources.length > 0 ? (
+                latestResources.map((product) => (
+                <LatestResources
+                    key={product._id}
+                    product={product}
+                    handleRefetch={handleRefetch}
+                />
+                ))
+            ) : (
+                Array.from({ length: 4 }).map((_, index) => (
+                <ProductCardSkeleton key={index} />
+                ))
+            )}
         </div>
     )
 };

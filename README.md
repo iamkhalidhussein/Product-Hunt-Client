@@ -117,6 +117,9 @@ This application supports three types of user roles:
 | Manage System Settings  | ❌       | ❌            | ✅        |
 | Assign Roles            | ❌       | ❌            | ✅        |
 
+## Backend Repo - https://github.com/iamkhalidhussein/Product-Hunt-Server
+
+
 ## Contributing
 
 We welcome contributions to enhance Resource FYI! If you'd like to contribute, please follow these guidelines:

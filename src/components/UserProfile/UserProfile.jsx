@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import useAxiosPublic from "../../hooks/useAxiosPublic.js";
 import PropTypes from "prop-types";
+import { Skeleton } from '@/components/ui/skeleton';
 
 const UserProfile = () => {
     const { user } = useContext(AuthContext);
@@ -41,14 +42,22 @@ const UserProfile = () => {
 export default UserProfile;
 
 const UserInfo = ({ user }) => {
+    const [imgLoaded, setImgLoaded] = useState(false);
 
+    const manageImgLoading = () => {
+        setImgLoaded(true);
+    };
+
+    console.log(imgLoaded)
     return (
     <div className="md:flex gap-3 items-end">
-      <img
-        className="rounded-full w-[100px] h-[100px]"
-        src={user?.photoURL}
-        alt="User Avatar"
-      />
+      {!imgLoaded && <Skeleton className="w-24 h-24 rounded-full"/>}
+        <img
+            className={`rounded-full w-[100px] h-[100px] ${!imgLoaded && 'hidden'}`}
+            src={user?.photoURL}
+            alt="User Avatar"
+            onLoad={manageImgLoading}
+        />
       <div>
         <h3 className="text-[#1B2530] dark:text-white text-xl font-medium hover:text-[#686EF8] cursor-pointer pb-2">
           {user?.displayName}

@@ -36,6 +36,8 @@ const useHandleLogin = (setLoading) => {
                 title: "Login Successful",
                 text: "You have successfully logged in.",
                 icon: "success",
+                showConfirmButton: false,
+                timer: 1500
             });
     
             // Navigate to the intended page

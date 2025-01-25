@@ -42,7 +42,7 @@ const UserAccountSetting = () => {
         })
         // console.log(res.data);
         const imageUrl = res.data.data.display_url;
-        const updateRes = await updateUserProfilePic(imageUrl);
+        await updateUserProfilePic(imageUrl);
         setUpdatingProfile(false);
         // console.log(updateRes)
     };
@@ -62,7 +62,7 @@ const UserAccountSetting = () => {
         if (bio) newData.bio = bio;
         if (website_url) newData.website_url = website_url;
 
-        const updateRes = await axiosSecure.patch(`/users/updateuserprofileinfo/${user?.email}`, newData);
+        await axiosSecure.patch(`/users/updateuserprofileinfo/${user?.email}`, newData);
         // console.log(updateRes);
 
     };
@@ -74,7 +74,7 @@ const UserAccountSetting = () => {
             setUserProfileInfo(fetchedData?.data);
         };
         fetchUserProfile();
-    }, [])
+    }, [user?.email, axiosSecure]);
 
     return (
         <div className="pt-12">

@@ -25,7 +25,7 @@ const Navbar = () => {
     }, [theme]);
 
     // console.log(theme);
-    console.log(user)
+    // console.log(user)
 
     return (
         <div className="flex justify-between fixed z-10 w-full px-3 md:px-10 dark:bg-black bg-[#F5F8F9] py-6 border ">

@@ -4,6 +4,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic.js";
 import ChangeProfilePicture from "./ChangeProfilePicture.jsx";
 import UpdateProfileDetails from "./UpdateProfileDetails.jsx";
 import useAxiosSecure from "../../hooks/useAxiosSecure.js";
+import Swal from "sweetalert2";
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -17,6 +18,7 @@ const UserAccountSetting = () => {
     const [updatingProfile, setUpdatingProfile] = useState(false);
     const axiosSecure = useAxiosSecure();
     const [userProfileInfo, setUserProfileInfo] = useState(null);
+    const [userInfoUpdating, setUserInfoUpdating] = useState(false);
 
     const handleImageChange = (e) => {
         const imageFile = e.target.files[0];
@@ -48,6 +50,8 @@ const UserAccountSetting = () => {
     };
 
     const handleUserInfoUpdate = async (e) => {
+        setUserInfoUpdating(true);
+
         e.preventDefault();
         const form = e.target;
         const full_name = form.full_name.value;
@@ -62,9 +66,22 @@ const UserAccountSetting = () => {
         if (bio) newData.bio = bio;
         if (website_url) newData.website_url = website_url;
 
-        await axiosSecure.patch(`/users/updateuserprofileinfo/${user?.email}`, newData);
-        // console.log(updateRes);
-
+        try {
+            const response = await axiosSecure.patch(`/users/updateuserprofileinfo/${user?.email}`, newData);
+            if(response?.data && response?.status === 200) {
+                Swal.fire({
+                    position: "top-right",
+                    icon: "success",
+                    title: "User profile updated successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        } catch (error) {
+            console.error("Failed to update user info:", error);
+        } finally {
+            setUserInfoUpdating(false);
+        }
     };
 
     useEffect(() => {
@@ -88,6 +105,7 @@ const UserAccountSetting = () => {
                     selectedImageFile={selectedFile}
                 />
                 <UpdateProfileDetails 
+                    userInfoUpdating={userInfoUpdating}
                     handleUserInfoUpdate={handleUserInfoUpdate} 
                     user={userProfileInfo}
                 />

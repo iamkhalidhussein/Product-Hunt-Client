@@ -13,22 +13,25 @@ const UserProfile = () => {
     const [isSubscribe, setIsSubscribe] = useState(false);
 
     useEffect(() => {
-    axiosPublic.get(`/users/paymentinfo/${user?.email || user.providerData[0]?.email}`)
-    .then((res) => {
-        // console.log(res.data)
-        if(res.data.email) {
-            setIsSubscribe(true)
-        }
-        else {
-            setIsSubscribe(false)
-        }
-    })
-    .catch((error) => {
-        console.log(error);
-    })
-    }, [])
+        const fetchPaymentInfo = async () => {
+            try {
+                const email = user?.email || user?.providerData[0]?.email;
+                if (!email) {
+                    console.warn("No email found for the user.");
+                    setIsSubscribe(false);
+                    return;
+                }
+    
+                const res = await axiosPublic.get(`/users/paymentinfo/${email}`);
+                setIsSubscribe(!!res.data.email);
+            } catch (error) {
+                console.error("Failed to fetch payment info:", error);
+                setIsSubscribe(false);
+            }
+        };
+        fetchPaymentInfo();
+    }, [axiosPublic, user?.email, user?.providerData]);
 
-    // const isSubscribe = false;
     return (
         <>
             <div className='md:flex mt-14 border items-start justify-between pl-5 pr-5 rounded-lg py-10 bg-white dark:bg-gray-700'>
@@ -48,7 +51,6 @@ const UserInfo = ({ user }) => {
         setImgLoaded(true);
     };
 
-    console.log(imgLoaded)
     return (
     <div className="md:flex gap-3 items-end">
       {!imgLoaded && <Skeleton className="w-24 h-24 rounded-full"/>}

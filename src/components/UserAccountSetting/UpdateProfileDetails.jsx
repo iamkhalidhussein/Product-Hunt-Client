@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
-const UpdateProfileDetails = ({ handleUserInfoUpdate, user }) => {
+const UpdateProfileDetails = ({ handleUserInfoUpdate, user, userInfoUpdating }) => {
     const [onChange, setOnChange] = useState(false);
     
-    console.log(user)
-    console.log(onChange);
+    // console.log(user)
+    // console.log(onChange);
+
     return (
         <div className="border md:w-1/2 md:mt-0 mt-3 bg-white py-12 px-10">
             <form onSubmit={handleUserInfoUpdate}>
@@ -51,12 +53,10 @@ const UpdateProfileDetails = ({ handleUserInfoUpdate, user }) => {
                     placeholder="https://example.com"
                     onChange={() => setOnChange(true)}
                 />
-
-                <input
-                    className={`bg-[#686EF8] py-3 cursor-pointer text-white mt-6 px-6 rounded ${!onChange && 'pointer-events-none opacity-75'}`}
-                    type="submit"
-                    value="Save Now"
-                />
+                    <button
+                        className={`bg-[#686EF8] flex gap-2 py-3 cursor-pointer text-white mt-6 px-6 rounded ${!onChange && 'pointer-events-none opacity-75'}`}
+                        type="submit"
+                    >{userInfoUpdating ? <>Saving...<Loader2 className="animate-spin"/></> : 'Save Now'}</button>
             </form>
         </div>
     );
@@ -101,5 +101,6 @@ InputField.propTypes = {
 
 UpdateProfileDetails.propTypes = {
     handleUserInfoUpdate: PropTypes.func.isRequired,
-    user: PropTypes.object
+    user: PropTypes.object,
+    userInfoUpdating: PropTypes.bool
 };

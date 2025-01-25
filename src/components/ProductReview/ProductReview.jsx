@@ -18,7 +18,7 @@ const ProductReview = () => {
         enabled: !!user?.email,
     });
 
-    console.log(userProducts);
+    // console.log(userProducts);
 
     if (isError) {
         return <div>Error fetching products. Please try again later.</div>;

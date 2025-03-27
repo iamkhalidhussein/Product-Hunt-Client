@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import upvotee from '../../assets/upvote.svg';
 import ProductCard from "./ProductCard.jsx";
 
-const FeatureItem = ({product, handleRefetch}) => {
+const FeatureItem = ({product, handleRefetch, lastItemRef}) => {
     // console.log(product);
     const {user} = useContext(AuthContext);
     const {_id, image, title, description, upvote, visit_site} = product;
@@ -49,6 +49,7 @@ const FeatureItem = ({product, handleRefetch}) => {
     return (
         <>
             <ProductCard
+                itemRef={lastItemRef}
                 _id={_id}
                 truncatedDescription={truncatedDescription}
                 handleUpvoteCount={handleUpvoteCount}

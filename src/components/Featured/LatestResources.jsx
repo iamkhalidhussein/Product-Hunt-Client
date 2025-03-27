@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import upvotee from '../../assets/upvote.svg';
 import ProductCard from "./ProductCard.jsx";
 
-const LatestResources = ({product, handleRefetch}) => {
+const LatestResources = ({product, handleRefetch, itemRef}) => {
     const {user} = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
@@ -41,6 +41,7 @@ const LatestResources = ({product, handleRefetch}) => {
     return (
         <>
             <ProductCard
+                itemRef={itemRef}
                 _id={_id}
                 truncatedDescription={truncatedDescription}
                 handleUpvoteCount={handleUpvoteCount}

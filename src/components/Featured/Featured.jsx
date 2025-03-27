@@ -1,39 +1,23 @@
 import 'react-tooltip/dist/react-tooltip.css'
 import { useState } from 'react';
-import FeatureItem from './FeatureItem';
-import LatestResources from './LatestResources';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosPublic from '../../hooks/useAxiosPublic.js';
 import CategoryItem from './CategoryItem.jsx';
 import categories from './categories/categories.json';
 import PropTypes from 'prop-types';
-import { ProductCardSkeleton } from './ProductCardSkeleton.jsx';
+import { FeaturedResourceHeader1 } from './featured-components/FeaturedResourceHeader1.jsx';
+import { FeaturedResourceHeader2 } from './featured-components/FeaturedResourceHeader2.jsx';
+import LatestResourcesHeader from './featured-components/LatestResourcesHeader.jsx';
+import { FetchLatestResources } from './featured-components/FetchLatestResources.jsx';
+import { FetchFeaturedProducts } from './featured-components/FetchFeaturedProducts.jsx';
+import useFeaturedProducts from '../../hooks/useFeaturedProducts.js';
+import useLatestResources from '../../hooks/useLatestResources.js';
 
 const Featured = () => {
     const [showAll, setShowAll] = useState(false);
-    const axiosPublic = useAxiosPublic();
-    
-    const {data: featuredProducts = [], refetch: refetchFeaturedProducts} = useQuery({
-        queryKey: ['userrs'],
-        queryFn: async () => {
-            const res = await axiosPublic.get('/products/featured-products', {
-            });
-            return res.data;
-        }
-    }); 
-    // console.log(featuredProducts)
 
+    const { featuredProducts, refetchFeaturedProducts, lastItemRef1, isError1, data1, isFeaturedProductsLoading } = useFeaturedProducts();
     
-    const {data: latestResources = [], refetch: refetchLatestResources} = useQuery({
-        queryKey: ['users'],
-        queryFn: async () => {
-            const res = await axiosPublic.get('/products/latest-resources', {
-            });
-            return res.data;
-        }
-    });
-    // console.log(latestResources)
-    
+    const { data, latestResources, isLatestResourcesLoading, lastItemRef, isError, refetchLatestResources } = useLatestResources();
+
     const handleRefetch = () => {
         refetchFeaturedProducts();
         refetchLatestResources();
@@ -42,6 +26,9 @@ const Featured = () => {
     const handleShowAll = () => {
         setShowAll(true)
     }
+
+    console.log('data1', data1, lastItemRef1);
+    console.log('data', data, lastItemRef);
 
     const renderLatestItems = () => {
         if(!showAll) {    
@@ -52,6 +39,9 @@ const Featured = () => {
                     <FetchLatestResources 
                         latestResources={latestResources}
                         handleRefetch={handleRefetch}
+                        isLatestResourcesLoading={isLatestResourcesLoading}
+                        lastItemRef={lastItemRef}
+                        isError={isError}
                     />
                 </>
             )
@@ -59,23 +49,23 @@ const Featured = () => {
     };
 
     const renderFeaturedItems = () => {
-        if(showAll) {
-            return (
-                <FetchFeaturedProducts 
-                    showAll={showAll}
-                    featuredProducts={featuredProducts}
-                    handleRefetch={handleRefetch}
-                />
-            ) 
-        } 
-        if(!showAll) {
-            return (
-                <FetchFeaturedProducts 
+        return (
+            <FetchFeaturedProducts 
                 showAll={showAll}
                 featuredProducts={featuredProducts}
                 handleRefetch={handleRefetch}
+                isError={isError1}
+                isFeaturedProductsLoading={isFeaturedProductsLoading}
+                lastItemRef={lastItemRef1}
             />
-            )
+        ) 
+    };
+
+    const renderFeaturedResourceHeader = () => {
+        if(!showAll) {
+            return <FeaturedResourceHeader1/>;
+        } else {
+            return <FeaturedResourceHeader2/>; 
         }
     };
 
@@ -89,10 +79,7 @@ const Featured = () => {
                 ))}
             </div>
             <div className='mt-14 w-full'>
-                { !showAll 
-                ? <FeaturedResourceHeader1/>
-                : <FeaturedResourceHeader2/>
-                }
+                {renderFeaturedResourceHeader()}
                 <hr className='mr-8'/>                
                 {renderFeaturedItems()}
                 {renderLatestItems()}
@@ -103,94 +90,8 @@ const Featured = () => {
 
 export default Featured;
 
-
-const FeaturedResourceHeader1 = () => {
-    return (
-        <>
-            <h1 className="text-[#1B2530] dark:text-white md:px-0 px-1 text-[36px] font-medium">Featured Resources and Products</h1>
-            <p className="text-[#70808A] md:px-0 px-1 inter text-base font-medium pb-7">Trending, popular and featured resources, loved by the users most</p>
-        </>
-    )
-};
-
-const FeaturedResourceHeader2 = () => {
-    return (
-        <>
-            <h1 className="text-[#1B2530] dark:text-white text-[36px] font-medium leading-10 pb-3">Free Tools, Products and Resources for <br /> Developers and Designers</h1>
-            <p className="text-[#70808A] dark:text-white inter text-base font-medium pb-7">You&apos;re exploring all available resources and products from all categories. Massive collection of the latest web development tools, design resources, and more. If you would like to sort them by category choose resource type from sidebar also you can sort by popular upvotes from right side. If you find something interesting feel free to submit and upvote resources you like most. All the resources handpicked for developers and designers to improve workflow.</p>
-        </>
-    )
-};
-
-const FetchFeaturedProducts = ({showAll, featuredProducts, handleRefetch}) => {
-    return (
-        <div className="grid md:grid-cols-2 grid-cols-1 pt-12 gap-5">
-            {!featuredProducts || featuredProducts.length === 0 ? (                
-                Array.from({ length: showAll ? 6 : 2 }).map((_, index) => (
-                <ProductCardSkeleton key={index} />
-                ))
-            ) : (
-                showAll
-                ? featuredProducts.map((product) => (
-                    <FeatureItem
-                        key={product._id}
-                        product={product}
-                        handleRefetch={handleRefetch}
-                    />
-                    ))
-                : featuredProducts.slice(0, 2).map((product) => (
-                    <FeatureItem
-                        key={product._id}
-                        product={product}
-                        handleRefetch={handleRefetch}
-                    />
-                ))
-            )}
-        </div>
-    )
-}
-
-const FetchLatestResources = ({ latestResources, handleRefetch }) => {
-    return (
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-6 pt-14 pr-3">
-            {latestResources.length > 0 ? (
-                latestResources.map((product) => (
-                <LatestResources
-                    key={product._id}
-                    product={product}
-                    handleRefetch={handleRefetch}
-                />
-                ))
-            ) : (
-                Array.from({ length: 4 }).map((_, index) => (
-                <ProductCardSkeleton key={index} />
-                ))
-            )}
-        </div>
-    )
-};
-
-const LatestResourcesHeader = ({ handleShowAll }) => {
-    return (
-        <div className='md:flex hidden items-center justify-between pr-3 pt-10'>
-            <div><h1 className="text-[#1B2530] text-[36px] font-medium">Latest Resources</h1>
-            <p className="text-[#70808A] inter text-base font-medium pb-7">Trending, popular and featured resources, loved by the users most</p></div>
-            <button onClick={handleShowAll} className='bg-[#686EF8] text-white text-base font-medium py-3 px-6 rounded-md cursor-pointer'>View All</button>
-        </div>
-    )
-};
-
 FetchFeaturedProducts.propTypes = {
     showAll: PropTypes.bool,
     featuredProducts: PropTypes.array,
-    handleRefetch: PropTypes.func
-};
-
-LatestResourcesHeader.propTypes = {
-    handleShowAll: PropTypes.func
-};
-
-FetchLatestResources.propTypes = {
-    latestResources: PropTypes.array,
     handleRefetch: PropTypes.func
 };

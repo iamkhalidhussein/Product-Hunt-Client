@@ -11,10 +11,11 @@ const ProductCard = ({
     handleUpvoteCount, 
     upvotee, 
     upvote, 
-    visit_site 
+    visit_site,
+    itemRef
 }) => {
     return (
-        <div className="flex justify-center">
+        <div ref={itemRef} className="flex justify-center">
             <div className="border rounded-lg">
                 <ImageSection image={image} />
                 <TitleSection title={title} />

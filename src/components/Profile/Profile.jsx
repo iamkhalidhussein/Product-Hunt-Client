@@ -19,7 +19,7 @@ const Profile = () => {
             <div className="flex gap-3 items-end">
               <img
                 className="rounded-full w-[100px] h-[100px]"
-                src={user.photoURL}
+                src={user?.photoURL}
                 alt="Profile"
                 onError={(e) => {
                   e.target.src = "https://example.com/default-profile.png";
@@ -47,47 +47,12 @@ const Profile = () => {
           </div>
     
           <h2 className="text-[#1B2530] text-[36px] font-semibold py-9">Your Submission</h2>
-          <div className="border flex justify-start gap-3 p-4 rounded bg-white">
-            <TabButton
-              id="approved"
-              label="Approved"
-              isActive={activeTab === "approved"}
-              onClick={() => handleTabChange("approved")}
+          <TabButtonGroup 
+            activeTab={activeTab} 
+            handleTabChange={handleTabChange}
             />
-            <TabButton
-              id="underReview"
-              label="Under Review"
-              isActive={activeTab === "underReview"}
-              onClick={() => handleTabChange("underReview")}
-            />
-            <TabButton
-              id="rejected"
-              label="Rejected"
-              isActive={activeTab === "rejected"}
-              onClick={() => handleTabChange("rejected")}
-            />
-          </div>
     
-          <div className="mt-8">
-            {activeTab === "approved" && (
-              <div key="approved">
-                <p>Approved</p>
-                <EmptyState tab="approved" />
-              </div>
-            )}
-            {activeTab === "underReview" && (
-              <div key="underReview">
-                <p>Under Review</p>
-                <EmptyState tab="under review" />
-              </div>
-            )}
-            {activeTab === "rejected" && (
-              <div key="rejected">
-                <p>Rejected</p>
-                <EmptyState tab="rejected" />
-              </div>
-            )}
-          </div>
+          <RenderTabContent activeTab={activeTab}/>
         </div>
       );
 };
@@ -124,3 +89,52 @@ const TabButton = ({ id, label, isActive, onClick }) => {
     )
 };
 
+const TabButtonGroup = ({ activeTab, handleTabChange }) => {
+  return (
+    <div className="border flex justify-start gap-3 p-4 rounded bg-white">
+            <TabButton
+              id="approved"
+              label="Approved"
+              isActive={activeTab === "approved"}
+              onClick={() => handleTabChange("approved")}
+            />
+            <TabButton
+              id="underReview"
+              label="Under Review"
+              isActive={activeTab === "underReview"}
+              onClick={() => handleTabChange("underReview")}
+            />
+            <TabButton
+              id="rejected"
+              label="Rejected"
+              isActive={activeTab === "rejected"}
+              onClick={() => handleTabChange("rejected")}
+            />
+      </div>
+  )
+};
+
+const RenderTabContent = ({ activeTab }) => {
+  return (
+    <div className="mt-8">
+            {activeTab === "approved" && (
+              <div key="approved">
+                <p>Approved</p>
+                <EmptyState tab="approved" />
+              </div>
+            )}
+            {activeTab === "underReview" && (
+              <div key="underReview">
+                <p>Under Review</p>
+                <EmptyState tab="under review" />
+              </div>
+            )}
+            {activeTab === "rejected" && (
+              <div key="rejected">
+                <p>Rejected</p>
+                <EmptyState tab="rejected" />
+              </div>
+            )}
+      </div>
+  )
+};

@@ -2,30 +2,19 @@ import { LuUser } from "react-icons/lu";
 import { FaXTwitter } from "react-icons/fa6";
 import { AiFillDiscord } from "react-icons/ai";
 import { FiPlus } from "react-icons/fi";
-import {Link} from 'react-router-dom';
-import { useContext, useEffect, useState } from "react";
-import {AuthContext} from '../../providers/AuthProvider';
+import { Link } from 'react-router-dom';
+import { useContext } from "react";
+import { AuthContext } from '../../providers/AuthProvider';
 import { Switch } from "@/components/ui/switch";
 import DropdownMenu from '@/components/DropdownMenu/DropdownMenu';
+import useThemeToggle from "../../hooks/useThemeToggle";
 
 const Navbar = () => {
     const { user } = useContext(AuthContext);
-
-    const [theme, setTheme] = useState(() => {
-        return localStorage.getItem("resourcefyi-theme") === "dark";
-    });
-
-    const handleThemeChange = () => {
-        setTheme(!theme);
-        localStorage.setItem("resourcefyi-theme", !theme ? "dark" : "light");
-    };
-
-    useEffect(() => {
-        document.documentElement.classList.toggle("dark", theme);
-    }, [theme]);
-
+    const { handleThemeChange, theme } = useThemeToggle();
+    
     // console.log(theme);
-    // console.log(user)
+    // console.log(user);
 
     return (
         <div className="flex justify-between fixed z-10 w-full px-3 md:px-10 dark:bg-black bg-[#F5F8F9] py-6 border ">

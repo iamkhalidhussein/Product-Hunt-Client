@@ -13,19 +13,33 @@ import useLatestResources from '../../hooks/useLatestResources.js';
 
 const Featured = () => {
     const [showAll, setShowAll] = useState(false);
-
-    const { featuredProducts, refetchFeaturedProducts, lastItemRef1, isError1, data1, isFeaturedProductsLoading } = useFeaturedProducts();
     
-    const { data, latestResources, isLatestResourcesLoading, lastItemRef, isError, refetchLatestResources } = useLatestResources();
+    const { 
+        featuredProducts, 
+        refetchFeaturedProducts, 
+        lastItemRef1, 
+        isError1, 
+        data1, 
+        isFeaturedProductsLoading 
+    } = useFeaturedProducts();
+    
+    const { 
+        data, 
+        latestResources, 
+        isLatestResourcesLoading, 
+        lastItemRef, 
+        isError, 
+        refetchLatestResources 
+    } = useLatestResources();
 
     const handleRefetch = () => {
         refetchFeaturedProducts();
         refetchLatestResources();
-    }
+    };
 
     const handleShowAll = () => {
-        setShowAll(true)
-    }
+        setShowAll(true);
+    };
 
     console.log('data1', data1, lastItemRef1);
     console.log('data', data, lastItemRef);
@@ -48,19 +62,6 @@ const Featured = () => {
         }
     };
 
-    const renderFeaturedItems = () => {
-        return (
-            <FetchFeaturedProducts 
-                showAll={showAll}
-                featuredProducts={featuredProducts}
-                handleRefetch={handleRefetch}
-                isError={isError1}
-                isFeaturedProductsLoading={isFeaturedProductsLoading}
-                lastItemRef={lastItemRef1}
-            />
-        ) 
-    };
-
     const renderFeaturedResourceHeader = () => {
         if(!showAll) {
             return <FeaturedResourceHeader1/>;
@@ -81,7 +82,14 @@ const Featured = () => {
             <div className='mt-14 w-full'>
                 {renderFeaturedResourceHeader()}
                 <hr className='mr-8'/>                
-                {renderFeaturedItems()}
+                <FetchFeaturedProducts 
+                    showAll={showAll}
+                    featuredProducts={featuredProducts}
+                    handleRefetch={handleRefetch}
+                    isError={isError1}
+                    isFeaturedProductsLoading={isFeaturedProductsLoading}
+                    lastItemRef={lastItemRef1}
+                />
                 {renderLatestItems()}
             </div>
         </div>

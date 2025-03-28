@@ -92,6 +92,9 @@ importers:
       react-icons:
         specifier: ^5.2.1
         version: 5.4.0(react@18.3.1)
+      react-intersection-observer:
+        specifier: ^9.15.1
+        version: 9.15.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-router-dom:
         specifier: ^6.23.1
         version: 6.28.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2893,6 +2896,15 @@ packages:
     peerDependencies:
       react: '*'
 
+  react-intersection-observer@9.15.1:
+    resolution: {integrity: sha512-vGrqYEVWXfH+AGu241uzfUpNK4HAdhCkSAyFdkMb9VWWXs6mxzBLpWCxEy9YcnDNY2g9eO6z7qUtTBdA9hc8pA==}
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -3998,11 +4010,6 @@ snapshots:
   '@ckeditor/ckeditor5-font@41.4.2':
     dependencies:
       ckeditor5: 41.4.2
-    transitivePeerDependencies:
-      - bufferutil
-      - canvas
-      - supports-color
-      - utf-8-validate
 
   '@ckeditor/ckeditor5-heading@41.4.2':
     dependencies:
@@ -7025,6 +7032,12 @@ snapshots:
   react-icons@5.4.0(react@18.3.1):
     dependencies:
       react: 18.3.1
+
+  react-intersection-observer@9.15.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+    optionalDependencies:
+      react-dom: 18.3.1(react@18.3.1)
 
   react-is@16.13.1: {}
 

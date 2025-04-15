@@ -25,15 +25,27 @@ const PaymentFailed = () => {
                 currency_type={currency_type} 
                 amount={amount}
             />
-            <PaymentDetailsRow label="Transaction ID" value={tran_id}/>
-            <PaymentDetailsRow label="Payment Time" value={tran_date}/>
+            <PaymentDetailsRow 
+                label="Transaction ID" 
+                value={tran_id}
+            />
+            <PaymentDetailsRow 
+                label="Payment Time" 
+                value={tran_date}
+            />
             <PaymentDetailsRow 
                 label="Payment Method" 
                 value={card_issuer === 'undefined' ? 'Null' : card_issuer}
             />
             <hr className="mb-6"/>
-            <PaymentDetailsRow label="Currency Type" value={currency_type}/>
-            <PaymentDetailsRow label="Amount" value={`${currency_type} ${amount}`}/>
+            <PaymentDetailsRow 
+                label="Currency Type" 
+                value={currency_type}
+            />
+            <PaymentDetailsRow 
+                label="Amount" 
+                value={`${currency_type} ${amount}`}
+            />
         </div>
     </div>
     );

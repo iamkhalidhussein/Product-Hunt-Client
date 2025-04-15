@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 import upvotee from '../../assets/upvote.svg';
 import ProductCard from "./ProductCard.jsx";
+import useCharacterLimit from "../../hooks/useCharacterLimit.js";
 
-const LatestResources = ({product, handleRefetch, itemRef}) => {
-    const {user} = useContext(AuthContext);
+const LatestResources = ({ product, handleRefetch, itemRef }) => {
+    const { user } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const {_id, image, title, description, upvote, visit_site} = product;
@@ -28,15 +29,7 @@ const LatestResources = ({product, handleRefetch, itemRef}) => {
         .catch(error => console.error('Error upvoting:', error));
     }
 
-    const charLimit = 145;
-    const truncatedDescription = description.length > charLimit
-    ? description.substring(0, charLimit) + '...'
-    : description;
-
-    const charLimitTitle = 33;
-    const truncatedTitle = title.length > charLimitTitle
-    ? title.substring(0, charLimitTitle) + '...'
-    : title;
+    const { truncatedDescription, truncatedTitle } = useCharacterLimit( title, description )
 
     return (
         <>
@@ -63,7 +56,8 @@ LatestResources.propTypes = {
         description: PropTypes.string,
         upvote: PropTypes.number,
         visit_site: PropTypes.string.isRequired,
-    }).isRequired, 
+    }).isRequired,
+    itemRef: PropTypes.any, 
     handleRefetch: PropTypes.func.isRequired,
 };
 

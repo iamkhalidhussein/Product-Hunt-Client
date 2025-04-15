@@ -13,10 +13,11 @@ import {
     AvatarImage,
   } from "@/components/ui/avatar"
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
+import useThemeToggle from "../../hooks/useThemeToggle";
 
 const DropdownMenuNavbar = () => {
     const { logOut } = useContext(AuthContext);
@@ -27,19 +28,8 @@ const DropdownMenuNavbar = () => {
         navigate('/');
     };
 
-    const [theme, setTheme] = useState(() => {
-      return localStorage.getItem("resourcefyi-theme") === "dark";
-  });
-
-  const handleThemeChange = () => {
-      setTheme(!theme);
-      localStorage.setItem("resourcefyi-theme", !theme ? "dark" : "light");
-  }
-
-  useEffect(() => {
-      document.documentElement.classList.toggle("dark", theme);
-  }, [theme]);
-
+    const { handleThemeChange, theme } = useThemeToggle();
+    
     return (
         <DropdownMenu>
       <DropdownMenuTrigger asChild>

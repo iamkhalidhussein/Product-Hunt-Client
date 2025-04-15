@@ -1,50 +1,22 @@
-import useAxiosPublic from "../../hooks/useAxiosPublic.js";
-import { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
 import PropTypes from 'prop-types';
 import upvotee from '../../assets/upvote.svg';
 import ProductCard from "./ProductCard.jsx";
+import useUpvoteCount from "../../hooks/useUpvoteCount.js";
+import useCharacterLimit from '../../lib/useCharacterLimit.js';
 
-const FeatureItem = ({product, handleRefetch, lastItemRef}) => {
-    // console.log(product);
-    const {user} = useContext(AuthContext);
-    const {_id, image, title, description, upvote, visit_site} = product;
-    const axiosPublic = useAxiosPublic();
-    const navigate = useNavigate();
+const FeatureItem = ({ product, handleRefetch, lastItemRef }) => {
 
-    const handleUpvoteCount = (_id) => {
-        if(!user) {
-            return navigate('/login');
-        }
-        
-        axiosPublic.patch(`/users/userrs/${user?.email}/${_id}`)
-        .then((res) => {
-            console.log(res.data, _id);
-            if(res.data === true) {
-                Swal.fire({
-                    title: "Reminder",
-                    text: "No Voting for Your Own Product",
-                    icon: "warning"
-                });
-            }
-            if (res.data.modifiedCount > 0) {
-                handleRefetch();
-            }
-        })
-        .catch(error => console.error('Error upvoting:', error));
-    }
+    const { 
+        _id, 
+        image, 
+        upvote, 
+        visit_site,
+        title, 
+        description, 
+        handleUpvoteCount 
+    } = useUpvoteCount( product, handleRefetch );
 
-    const charLimit = 145;
-    const truncatedDescription = description.length > charLimit
-    ? description.substring(0, charLimit) + '...'
-    : description;
-
-    const charLimitTitle = 33;
-    const truncatedTitle = title.length > charLimitTitle
-    ? title.substring(0, charLimitTitle) + '...'
-    : title;
+    const { truncatedDescription, truncatedTitle } = useCharacterLimit( title, description );
 
     return (
         <>
@@ -73,7 +45,7 @@ FeatureItem.propTypes = {
         upvote: PropTypes.number,
         visit_site: PropTypes.string.isRequired,
     }).isRequired, 
-
+    lastItemRef: PropTypes.any,
     handleRefetch: PropTypes.func.isRequired, 
 };
 

@@ -8,7 +8,13 @@ import UserInfo from "./UserInfo";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 
-const Sidebar = ({ activeRoute, isAdmin, isModerator, dashboardLogOut, user }) => {
+const Sidebar = ({ 
+    activeRoute, 
+    isAdmin, 
+    isModerator, 
+    dashboardLogOut, 
+    user 
+}) => {
     
     const sidebarLinks = [
         { path: '/dashboard/adminHome', icon: <FaHome />, label: 'Admin Home', visible: isAdmin },

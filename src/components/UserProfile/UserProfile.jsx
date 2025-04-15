@@ -1,36 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProvider";
-import useAxiosPublic from "../../hooks/useAxiosPublic.js";
 import PropTypes from "prop-types";
 import { Skeleton } from '@/components/ui/skeleton';
+import useFetchPaymentInfo from "../../hooks/useFetchPaymentInfo.js";
 
 const UserProfile = () => {
-    const { user } = useContext(AuthContext);
-    const axiosPublic = useAxiosPublic();
-    const [isSubscribe, setIsSubscribe] = useState(false);
-
-    useEffect(() => {
-        const fetchPaymentInfo = async () => {
-            try {
-                const email = user?.email || user?.providerData[0]?.email;
-                if (!email) {
-                    console.warn("No email found for the user.");
-                    setIsSubscribe(false);
-                    return;
-                }
-    
-                const res = await axiosPublic.get(`/users/paymentinfo/${email}`);
-                setIsSubscribe(!!res.data.email);
-            } catch (error) {
-                console.error("Failed to fetch payment info:", error);
-                setIsSubscribe(false);
-            }
-        };
-        fetchPaymentInfo();
-    }, [axiosPublic, user?.email, user?.providerData]);
+    const { isSubscribe, user } = useFetchPaymentInfo();
 
     return (
         <>

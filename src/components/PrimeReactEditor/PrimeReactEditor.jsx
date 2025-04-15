@@ -7,8 +7,15 @@ const PrimeReactEditor = () => {
     // console.log(text)
     return (
         <div>
-                <div className="card" style={{width: '810px', borderRadius: '0',  backgroundColor: 'white'}}>
-                <Editor value={text} onTextChange={(e) => setText(e.htmlValue)} style={{ height: '320px', width: '810px', backgroundColor: 'white' }} />
+                <div 
+                    className="card" 
+                    style={{width: '810px', borderRadius: '0',  backgroundColor: 'white'}}
+                >
+                <Editor 
+                    value={text} 
+                    onTextChange={(e) => setText(e.htmlValue)} 
+                    style={{ height: '320px', width: '810px', backgroundColor: 'white' }}
+                />
             </div>
         </div>
     )

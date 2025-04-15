@@ -1,24 +1,13 @@
-import { useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { AuthContext } from "../../providers/AuthProvider";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import ProductReviewTable from "./ProductReviewTable";
+import useFetchUserSubmittedItems from "../../hooks/useFetchUserSubmittedItems";
 
 const ProductReview = () => {
-    const { user } = useContext(AuthContext);
-    const axiosSecure = useAxiosSecure();
-
-    const { data: userProducts = [], isLoading, isError, refetch } = useQuery({
-        queryKey: ["userProducts", user?.email],
-        queryFn: async () => {
-            if (!user?.email) return [];
-            const response = await axiosSecure.get(`/products/getallsubmittedproducts/${user.email}`);
-            return response.data;
-        },
-        enabled: !!user?.email,
-    });
-
-    // console.log(userProducts);
+    const { 
+        userProducts, 
+        isError, 
+        isLoading, 
+        refetch 
+    } = useFetchUserSubmittedItems();
 
     if (isError) {
         return <div>Error fetching products. Please try again later.</div>;
@@ -26,7 +15,11 @@ const ProductReview = () => {
 
     return (
         <div className="mt-12">
-            <ProductReviewTable products={userProducts} loading={isLoading} refetch={refetch}/>
+            <ProductReviewTable 
+                products={userProducts} 
+                loading={isLoading} 
+                refetch={refetch}
+            />
         </div>
     );
 };

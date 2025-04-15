@@ -9,14 +9,12 @@ import { ProductTableSkeleton } from "./components/ProductTableSkeleton.jsx";
 
 const MyProducts = () => {
     const { user } = useAuth();
-
     const [ userProducts, refetch, isLoading ] = useFetchUserProducts();
+    const handleProductDelete = useUserProductDelete();
 
     useEffect(() => {
         refetch(); 
-    }, [user?.email, refetch])
-
-    const handleProductDelete = useUserProductDelete();
+    }, [user?.email, refetch]);
 
     const renderTableContent = () => {
       if(isLoading) {

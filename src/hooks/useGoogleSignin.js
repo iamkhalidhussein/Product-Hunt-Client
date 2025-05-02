@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "./useAxiosSecure";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { ProviderId } from "firebase/auth";
@@ -9,10 +9,12 @@ const useGoogleSignin = () => {
     const navigate = useNavigate();
     const { googleSignIn } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
+    const [googleSignupLoading, setGoogleSignupLoading] = useState(false);
 
     //google popup sign in
     const signInWithGoogle = async () => {
         try {
+            setGoogleSignupLoading(true);
             // Sign in with Google
             const result = await googleSignIn();
             console.log("Google sign-in successful:", result.user);
@@ -57,10 +59,12 @@ const useGoogleSignin = () => {
                 title: 'Login Failed',
                 text: error.message || "An error occurred during Google sign-in. Please try again.",
             });
+        } finally {
+            setGoogleSignupLoading(false)
         }
     };
 
-    return signInWithGoogle;
+    return { signInWithGoogle, googleSignupLoading };
 };
 
 export default useGoogleSignin;

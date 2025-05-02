@@ -4,6 +4,7 @@ import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import PropTypes from 'prop-types';
 
 const Profile = () => {
     const { user } = useContext(AuthContext);
@@ -137,4 +138,20 @@ const RenderTabContent = ({ activeTab }) => {
             )}
       </div>
   )
+};
+
+RenderTabContent.propTypes = {
+  activeTab: PropTypes.string
+};
+
+TabButton.propTypes = {
+  id: PropTypes.string,
+  label: PropTypes.string,
+  isActive: PropTypes.bool,
+  onClick: PropTypes.func
+};
+
+TabButtonGroup.propTypes = {
+  activeTab: PropTypes.string,
+  handleTabChange: PropTypes.func
 };

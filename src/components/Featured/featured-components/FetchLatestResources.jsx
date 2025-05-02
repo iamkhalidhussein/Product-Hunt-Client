@@ -10,24 +10,27 @@ export const FetchLatestResources = ({
     lastItemRef,
     isError
 }) => {
+
+    // console.log(latestResources);
     return (
         <div className="grid md:grid-cols-2 grid-cols-1 gap-6 pt-14 pr-3">
-            {latestResources.map((product, idx) => {
-                const ref = idx === latestResources.length - 1 ? lastItemRef : undefined;
+            {latestResources.map((product) => {
                 return (
                     <LatestResources
                         key={product._id}
                         product={product}
                         handleRefetch={handleRefetch}
-                        itemRef={ref}
                     />
                 )
             })}
+            
             {isLatestResourcesLoading && (
                 Array.from({ length: 4 }).map((_, index) => (
                 <ProductCardSkeleton key={index} />
                 ))
             )}
+
+            <div ref={lastItemRef}></div>
             {isError && <ErrorFetchingData message="Failed to load resources. Please try again" onRetry={handleRefetch}/>}
         </div>
     )

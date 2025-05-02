@@ -4,7 +4,7 @@ import PaymentCancel from '../components/UserPaymentCancel/PaymentCancel';
 
 const paymentRoutes = [
   {
-    path: 'payment/success',
+    path: 'paymentsuccess',
     element: <PaymentSuccess />,
   },
   {
@@ -12,7 +12,7 @@ const paymentRoutes = [
     element: <PaymentFailed />,
   },
   {
-    path: 'payment/cancel',
+    path: 'paymentcancel',
     element: <PaymentCancel />,
   },
 ];

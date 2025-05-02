@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import upvotee from '../../assets/upvote.svg';
 import ProductCard from "./ProductCard.jsx";
 import useUpvoteCount from "../../hooks/useUpvoteCount.js";
-import useCharacterLimit from '../../lib/useCharacterLimit.js';
+import useCharacterLimit from '../../hooks/useCharacterLimit.js';
 
 const FeatureItem = ({ product, handleRefetch, lastItemRef }) => {
 

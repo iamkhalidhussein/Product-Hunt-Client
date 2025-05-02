@@ -72,7 +72,7 @@ const PaymentFeatureRow = ({ icon, label, value }) => (
   );
 
 PaymentFeatureRow.propTypes = {
-    icon: PropTypes.string,
+    icon: PropTypes.object,
     label: PropTypes.string,
     value: PropTypes.string
 };

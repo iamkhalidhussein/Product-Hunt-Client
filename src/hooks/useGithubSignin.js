@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -9,10 +9,12 @@ const useGithubSignin = () => {
     const { githubSignIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
+    const [githubSignupLoading, setGithubSignupLoading] = useState(false);
 
     //github sign in with popup
     const signInWithGithub = async () => {
         try {
+            setGithubSignupLoading(true);
             const result = await githubSignIn();
             // console.log('result', result);
 
@@ -45,10 +47,12 @@ const useGithubSignin = () => {
             }
         } catch (error) {
             console.error("Error during GitHub sign-in:", error.message);
+        } finally {
+            setGithubSignupLoading(false);
         }
     };
 
-    return signInWithGithub;
+    return { signInWithGithub, githubSignupLoading };
 };
 
 export default useGithubSignin;

@@ -21,7 +21,9 @@ const UserInfo = ({ user, dashboardLogOut }) => {
             />
             <div>
                 <h3 className='text-[#1B2530] dark:text-white text-xl font-medium'>{user.displayName}</h3>
-                <div onClick={dashboardLogOut} className='flex items-center text-[#79808A] dark:text-white gap-1 cursor-pointer hover:text-[#686EF8]'>
+                <div 
+                    onClick={dashboardLogOut} 
+                    className='flex items-center text-[#79808A] dark:text-white gap-1 cursor-pointer hover:text-[#686EF8]'>
                     <RiLogoutBoxRLine />
                     <span>Logout</span>
                 </div>

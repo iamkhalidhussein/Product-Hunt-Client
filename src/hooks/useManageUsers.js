@@ -8,21 +8,17 @@ const useManageUsers = () => {
     const {data: users = [], refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/users', {
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('access-token')}`
-                }
-            });
+            const res = await axiosSecure.get('/users');
             return res.data;
         }
     });
 
-    const handleMakeAdmin = (user) => {
-        axiosSecure.patch(`/users/admin/${user._id}`)
-        .then((res) => {
+    const handleToggleAdmin = (user) => {
+        axiosSecure.patch(`/users/admin/role/${user?.email}`)
+        .then(async (res) => {
             // console.log(res.data);
-            if(res.data.modifiedCount > 0) {
-                refetch();
+            if(res.data.success) {
+                await refetch();
                 Swal.fire({
                     icon: "success",
                     title: `${user.name} is an Admin Now`,
@@ -33,12 +29,12 @@ const useManageUsers = () => {
         })
     }
 
-    const handleMakeModerator = (user) => {
-        axiosSecure.patch(`/users/moderator/${user._id}`)
-        .then((res) => {
-            // console.log(res.data);
-            if(res.data.modifiedCount > 0) {
-                refetch();
+    const handleToggleModerator = (user) => {
+        axiosSecure.patch(`/users/moderator/role/${user?.email}`)
+        .then(async (res) => {
+            console.log(res);
+            if(res.data.success) {
+                await refetch();
                 Swal.fire({
                     icon: "success",
                     title: `${user.name} is an Moderator Now`,
@@ -50,7 +46,6 @@ const useManageUsers = () => {
     }
 
     const handleDeleteUser = (user) => {
-        // console.log(user)
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -74,9 +69,15 @@ const useManageUsers = () => {
                 })
                 }
             });
-    }
+        }
 
-    return { handleMakeAdmin, handleDeleteUser, handleMakeModerator, users };
+    return { 
+        handleToggleAdmin, 
+        handleDeleteUser, 
+        handleToggleModerator, 
+        users, 
+        refetch
+    };
 };
 
 export default useManageUsers;

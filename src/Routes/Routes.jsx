@@ -9,8 +9,8 @@ import dashboardRoutes from './dashboardRoutes';
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main></Main>,
-    errorElement: <ErrorPage></ErrorPage>,
+    element: <Main/>,
+    errorElement: <ErrorPage/>,
     children: [
       ...publicRoutes,
       ...paymentRoutes, 

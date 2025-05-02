@@ -18,8 +18,8 @@ const Login = () => {
     }
 
     const handleLogin = useHandleLogin(setLoading);
-    const signInWithGoogle = useGoogleSignin();
-    const signInWithGithub = useGithubSignin();
+    const { signInWithGoogle, googleSignupLoading } = useGoogleSignin();
+    const { signInWithGithub, githubSignupLoading } = useGithubSignin();
 
     return (
         <div className="bg-[#EAF0F2] dark:bg-gray-800 pt-20">
@@ -69,12 +69,14 @@ const Login = () => {
                         icon={<FcGoogle className="text-2xl" />}
                         text="Sign in with Google"
                         onClick={signInWithGoogle}
+                        loading={googleSignupLoading}
                     />
                     <SocialLoginButton
                         icon={<FaGithub className="text-2xl" />}
                         text="Sign in with Github"
                         onClick={signInWithGithub}
                         className="mt-3"
+                        loading={githubSignupLoading}
                     />
 
                     <p className="text-[#000] dark:text-white pt-1">

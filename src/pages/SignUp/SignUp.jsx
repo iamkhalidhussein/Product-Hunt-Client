@@ -20,8 +20,8 @@ const SignUp = () => {
     }
 
     const handleSignUp = useHandleSignup(imageURL, setLoading);
-    const signInWithGoogle = useGoogleSignin();
-    const signInWithGithub = useGithubSignin();
+    const { signInWithGoogle, googleSignupLoading } = useGoogleSignin();
+    const { signInWithGithub, githubSignupLoading } = useGithubSignin();
 
     const handleImageChange = (imgUrl) => {
         setImageURL(imgUrl)
@@ -73,14 +73,16 @@ const SignUp = () => {
 
                     <SocialLoginButton
                         icon={<FcGoogle className="text-2xl" />}
-                        text="Sign in with Google"
+                        text="Sign up with Google"
                         onClick={signInWithGoogle}
+                        loading={googleSignupLoading}
                     />
                     <SocialLoginButton
                         icon={<FaGithub className="text-2xl" />}
-                        text="Sign in with Github"
+                        text="Sign up with Github"
                         onClick={signInWithGithub}
                         className="mt-3"
+                        loading={githubSignupLoading}
                     />
 
                     <p className="text-[#000] dark:text-white pt-1">
@@ -145,16 +147,17 @@ export const PasswordInput = ({
     )
 };
 
-export const SocialLoginButton = ({ icon, text, onClick, className = "" }) => {
+export const SocialLoginButton = ({ icon, text, onClick, className = "", loading }) => {
     return (
         <div
-            onClick={onClick}
-            className={`border py-3 rounded flex gap-3 items-center justify-center hover:bg-[#F5F8F9] duration-200 cursor-pointer group ${className}`}
+            onClick={() => onClick()}
+            className={`border py-3 rounded flex gap-3 items-center justify-center hover:bg-[#F5F8F9] duration-200 ${ loading && 'pointer-events-none'} cursor-pointer group ${className}`}
         >
             {icon}  
             <p className="text-[#79808A] dark:text-white text-base inter font-normal group-hover:text-[#686EF8]">
             {text}
             </p>
+            {loading && <Loader2 className="animate-spin"/>}
         </div>
     )
 };
@@ -180,5 +183,6 @@ SocialLoginButton.propTypes = {
     icon: PropTypes.element,
     text: PropTypes.string,
     onClick: PropTypes.func,
-    className: PropTypes.string
+    className: PropTypes.string,
+    loading: PropTypes.bool
 };

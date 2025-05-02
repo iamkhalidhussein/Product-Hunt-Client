@@ -1,12 +1,11 @@
-import { useContext, useEffect } from 'react';
-import { UNSAFE_DataRouterStateContext } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 import useAxiosPublic from './useAxiosPublic';
 import { AuthContext } from '../providers/AuthProvider';
 
 const useFetchPaymentInfo = () => {
     const { user } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
-    const [isSubscribe, setIsSubscribe] = UNSAFE_DataRouterStateContext(false);
+    const [isSubscribe, setIsSubscribe] = useState(false);
 
     useEffect(() => {
         const fetchPaymentInfo = async () => {

@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Skeleton } from '@/components/ui/skeleton';
 import useFetchPaymentInfo from "../../hooks/useFetchPaymentInfo.js";
+import { Loader2 } from 'lucide-react';
+import useMakePayment from "../../hooks/useMakePayment.js";
 
 const UserProfile = () => {
     const { isSubscribe, user } = useFetchPaymentInfo();
 
+    console.log('isSubscribe', isSubscribe);
     return (
         <>
             <div className='md:flex mt-14 border items-start justify-between pl-5 pr-5 rounded-lg py-10 bg-white dark:bg-gray-700'>
                 <UserInfo user={user}/>
-                <SubscribeButton isSubscribe={isSubscribe}/>
+                <SubscribeButton 
+                    isSubscribe={isSubscribe} 
+                    userEmail={user?.email}
+                />
             </div>
         </>
     );
@@ -51,20 +56,25 @@ const UserInfo = ({ user }) => {
     )
 };
 
-const SubscribeButton = ({ isSubscribe }) => {
+const SubscribeButton = ({ isSubscribe, userEmail }) => {
+    const [loading, setLoading] = useState(false);
+
+    const doSubscribe = useMakePayment(setLoading, userEmail);
+
     return isSubscribe ? (
-        <button className="flex items-center md:mt-0 mt-3 bg-[#686EF8] px-3 py-1 rounded-sm text-[18px] text-white font-normal gap-1">
+        <button className="flex items-center md:mt-0 mt-3 bg-[#686EF8] px-3 py-1 rounded-sm text-[18px] text-white font-normal gap-1" disabled={isSubscribe}>
             <CiEdit className="text-2xl" />
             <span>Subscribed</span>
         </button>
     ) : (
-        <Link
-            to="/dashboard/userPayment"
-            className="flex items-center bg-[#686EF8] px-3 py-1 rounded-sm text-[18px] text-white font-normal gap-1"
-        >
-        <CiEdit className="text-2xl" />
-        <span>Subscribe</span>
-        </Link>
+        <button className="flex items-center bg-[#686EF8] px-3 py-1 rounded-sm text-[18px] text-white font-normal gap-1" disabled={loading} onClick={() => doSubscribe()}>
+            <CiEdit className="text-2xl" />
+            {
+            loading 
+                ? <Loader2 className="animate-spin"/> 
+                : <span>Subscribe</span>
+            }
+        </button>
     );
 };
 
@@ -73,5 +83,6 @@ UserInfo.propTypes = {
 };
 
 SubscribeButton.propTypes = {
+    userEmail: PropTypes.string,
     isSubscribe: PropTypes.bool,
 }

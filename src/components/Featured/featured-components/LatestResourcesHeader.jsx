@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const LatestResourcesHeader = ({ handleShowAll }) => {
     return (
         <div className='md:flex hidden items-center justify-between pr-3 pt-10'>
@@ -16,3 +18,7 @@ const LatestResourcesHeader = ({ handleShowAll }) => {
 };
 
 export default LatestResourcesHeader;
+
+LatestResourcesHeader.propTypes = {
+    handleShowAll: PropTypes.func
+};

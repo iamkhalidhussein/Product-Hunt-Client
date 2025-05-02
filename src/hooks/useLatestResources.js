@@ -21,11 +21,16 @@ const useLatestResources = () => {
         setPage
     );
     
+    console.log('lastitemref', lastItemRef);
     useEffect(() => {
         if(data?.data) {
-            setLatestResources((prevLatestResources) => [...prevLatestResources, ...data.data]);
+            if(page === 1) {
+                setLatestResources(data?.data);
+            } else {
+                setLatestResources((prevLatestResources) => [...prevLatestResources, ...data.data]);
+            }
         }
-    }, [data]);
+    }, [data, page]);
 
     return { 
         data, 

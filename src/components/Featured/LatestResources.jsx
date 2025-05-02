@@ -8,7 +8,7 @@ import upvotee from '../../assets/upvote.svg';
 import ProductCard from "./ProductCard.jsx";
 import useCharacterLimit from "../../hooks/useCharacterLimit.js";
 
-const LatestResources = ({ product, handleRefetch, itemRef }) => {
+const LatestResources = ({ product, handleRefetch }) => {
     const { user } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
@@ -34,7 +34,6 @@ const LatestResources = ({ product, handleRefetch, itemRef }) => {
     return (
         <>
             <ProductCard
-                itemRef={itemRef}
                 _id={_id}
                 truncatedDescription={truncatedDescription}
                 handleUpvoteCount={handleUpvoteCount}

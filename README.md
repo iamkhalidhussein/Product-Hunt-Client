@@ -1,3 +1,10 @@
+# This repository has moved!
+
+This project is now maintained in a new repository: [https://github.com/iamkhalidhussein/resource-fyi](https://github.com/iamkhalidhussein/resource-fyi)
+
+Please visit the new repository for the latest updates.
+
+
 # Resource FYI
 
 Welcome to Resource FYI! 🎉
